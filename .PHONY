@@ -1,0 +1,12 @@
+.PHONY: dirs clean run
+
+...
+
+dirs:
+    mkdir -p $(BIN)
+
+clean: $(BIN)
+    rm -rf $^
+
+run:
+    ./bin/ut_all
