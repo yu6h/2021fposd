@@ -11,7 +11,7 @@ public:
     Rectangle(double length, double width)
     : m_length(length), m_width(width)
     {
-        if(length<0||width<0)throw SideLengthLessThanZeroError();
+        if(length<=0||width<=0)throw SideLengthLessAndEqualThanZeroError();
     }
 
     double area() const { return m_length*m_width;}
@@ -33,7 +33,7 @@ private:
         return strout.str() ;
     }
 public:
-    class SideLengthLessThanZeroError{
+    class SideLengthLessAndEqualThanZeroError{
 
     };
 };

@@ -20,5 +20,5 @@ TEST_F(CaseTriangle,Perimeter){
     EXPECT_NEAR(52.7679085294,triangle->perimeter(),0.001);
 }
 TEST_F(CaseTriangle,Exception){
-    EXPECT_THROW(new Triangle(TwoDimensionalVector(3,12.433),TwoDimensionalVector(3,12.433)),Triangle::SameVectorError);
+    EXPECT_THROW(new Triangle(TwoDimensionalVector(3,12.433),TwoDimensionalVector(6,24.866)),Triangle::ParallelVectorError);
 }

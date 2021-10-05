@@ -22,6 +22,8 @@ TEST_F(CaseRectangle, Info){
     EXPECT_EQ("Rectangle (3.14 4.50)",rectangle->info());
 }
 TEST_F(CaseRectangle, Exception){
-    EXPECT_THROW(new Rectangle(-8,5),Rectangle::SideLengthLessThanZeroError);
+    EXPECT_THROW(new Rectangle(-8,5),Rectangle::SideLengthLessAndEqualThanZeroError);
+    EXPECT_THROW(new Rectangle(8,0),Rectangle::SideLengthLessAndEqualThanZeroError);
+    EXPECT_THROW(new Rectangle(0,5),Rectangle::SideLengthLessAndEqualThanZeroError);
 }
 

@@ -26,5 +26,6 @@ TEST_F(CaseCircle,Info){
     EXPECT_EQ("Circle (1.10)",circle->info());
 }
 TEST_F(CaseCircle,Exception){
-    EXPECT_THROW(new Circle(-5),Circle::LessThanZeroError);
+    EXPECT_THROW(new Circle(-5),Circle::LessAndEualThanZeroError);
+    EXPECT_THROW(new Circle(0),Circle::LessAndEualThanZeroError);
 }

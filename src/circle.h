@@ -12,7 +12,7 @@ public:
 
     Circle(double radius):m_radius(radius)
     {
-        if(radius<0)throw LessThanZeroError();
+        if(radius<=0)throw LessAndEualThanZeroError();
     }
 
     double area() const { return m_radius*m_radius*M_PI;}
@@ -30,6 +30,6 @@ private:
         return strout.str() ;
     }
 public:
-    class LessThanZeroError{
+    class LessAndEualThanZeroError{
     };
 };

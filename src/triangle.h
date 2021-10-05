@@ -8,7 +8,7 @@ private:
     const TwoDimensionalVector m_vec1,m_vec2;
 public:
     Triangle(TwoDimensionalVector vec1, TwoDimensionalVector vec2) :m_vec1(vec1),m_vec2(vec2) {
-        if(vec1.x()==vec2.x()&&vec1.y()==vec2.y()) throw SameVectorError();
+        if(vec1.cross(vec2)==0) throw ParallelVectorError();
     }
 
     double area() const { 
@@ -31,7 +31,7 @@ public:
         return std::string("Triangle (").append(m_vec1.info()).append(" ").append(m_vec2.info()).append(")");
      }
 public:
-    class SameVectorError{
+    class ParallelVectorError{
 
     };
 };
