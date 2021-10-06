@@ -26,12 +26,15 @@ TEST_F(CaseTwoDimensionalVector,Length){
 }
 TEST_F(CaseTwoDimensionalVector,Info){
     EXPECT_EQ("[3.00,12.43]",vector1->info());
+    EXPECT_EQ("[10.00,0.28]",TwoDimensionalVector(10,0.28).info());
 }
 TEST_F(CaseTwoDimensionalVector,DotProduct){
     EXPECT_NEAR(2.97167,vector1->dot(*vector2),0.001);
+    EXPECT_NEAR(0,TwoDimensionalVector(-2,-2).dot(TwoDimensionalVector(-2,2)),0.001);
 }
 TEST_F(CaseTwoDimensionalVector,CrossProduct){
     EXPECT_NEAR(-230.42157637,vector1->cross(*vector2),0.001);
+    EXPECT_NEAR(100,TwoDimensionalVector(10,0).cross(TwoDimensionalVector(0,10)),0.001);
 }
 TEST_F(CaseTwoDimensionalVector,Subtract){
     TwoDimensionalVector expected(-14.56789,16.433);
@@ -40,4 +43,6 @@ TEST_F(CaseTwoDimensionalVector,Subtract){
 }
 TEST_F(CaseTwoDimensionalVector,Exeception){
     EXPECT_THROW(new TwoDimensionalVector(0,0),TwoDimensionalVector::ZeroVectorError);
+    EXPECT_NO_THROW(new TwoDimensionalVector(0.1,0));
+    EXPECT_NO_THROW(new TwoDimensionalVector(0,-0.001));
 }
