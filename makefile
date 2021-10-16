@@ -1,10 +1,19 @@
-.PHONY: clean
+.PHONY: clean test
 
-TEST= test/ut_rectangle.h test/ut_circle.h test/ut_triangle.h test/ut_two_dimensional_vector.h
-SRC= src/circle.h src/rectangle.h src/shape.h src/triangle.h src/two_dimensional_vector.h
+all: directories ut_main
 
-bin/ut_all: test/ut_main.cpp $(TEST) $(SRC)
+TEST: test/ut_paragraph.h test/ut_list_item.h test/ut_text.h test/ut_main.cpp \
+	  test/ut_list_item.h
+SRC: src/article.h src/list_item.h src/paragraph.h src/text.h
+
+ut_main: test/ut_main.cpp $(TEST) $(SRC)
 	g++ -std=c++11 test/ut_main.cpp -o bin/ut_all -lgtest -lpthread
 
+directories:
+	mkdir -p bin
+
 clean:
-	rm -f bin/ut_all
+	rm -rf bin
+	
+test: all
+	bin/ut_all
