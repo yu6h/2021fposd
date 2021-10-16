@@ -16,7 +16,7 @@ TEST_F(CaseListItem,Level){
     EXPECT_EQ(0,x->getLevel());
 }
 TEST_F(CaseListItem,Text){
-    EXPECT_EQ("-list1",x->getText());
+    EXPECT_EQ("- list1",x->getText());
 }
 TEST_F(CaseListItem,Exception){
     EXPECT_ANY_THROW(x->add(new ListItem("adfoasdfwe")));

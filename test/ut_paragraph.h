@@ -1,7 +1,6 @@
 #pragma once
 #include<gtest/gtest.h>
 #include"../src/paragraph.h"
-#include"../src/iterator.h"
 #include"../src/list_item.h"
 #include"../src/text.h"
 class CaseParagraph: public ::testing::Test{
@@ -23,7 +22,7 @@ TEST_F(CaseParagraph,Text){
     p.add(new ListItem("list2"));
     p.add(new Text("text"));
 
-    EXPECT_EQ("#title\n-list1\n-list2\ntext",p.getText());
+    EXPECT_EQ("# title\n- list1\n- list2\ntext",p.getText());
 
     Paragraph* p2 = new Paragraph(2, "title2");
     p2->add(new ListItem("list3"));
@@ -31,7 +30,7 @@ TEST_F(CaseParagraph,Text){
     p2->add(new Text("sub text"));
     p.add(p2);
 
-    EXPECT_EQ("#title\n-list1\n-list2\ntext\n##title2\n-list3\n-list4\nsub text",p.getText());
+    EXPECT_EQ("# title\n- list1\n- list2\ntext\n## title2\n- list3\n- list4\nsub text",p.getText());
 
 }
 TEST_F(CaseParagraph,Exception){

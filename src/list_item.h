@@ -8,7 +8,7 @@ class ListItem : public Article {
     ListItem(std::string text): Article(0,text){}
 
     std::string getText() const override{
-        return "-"+_text;
+        return "- "+_text;
     }
 
     void add(Article* dpFormat) override{

@@ -3,7 +3,7 @@
 #include"article.h"
 #include<typeinfo>
 #include<vector>
-#include"iterator.h"
+
 class Paragraph : public Article {
     private:
         std::vector<Article*> articles;
@@ -19,7 +19,7 @@ class Paragraph : public Article {
     }
 
     std::string getText() const override {
-        std::string textOfParagraph("#");
+        std::string textOfParagraph("# ");
         textOfParagraph.append(_text);
         textOfParagraph.append("\n");
         for(int i=0;i<articles.size();i++){
