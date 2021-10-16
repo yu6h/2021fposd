@@ -19,27 +19,20 @@ class Paragraph : public Article {
     }
 
     std::string getText() const override {
-        std::string textOfParagraph("# ");
-        textOfParagraph.append(_text);
-        textOfParagraph.append("\n");
+        std::string textOfParagraph;
+        if(_text.compare("")!=0){
+            textOfParagraph.append("# ");
+            textOfParagraph.append(_text);
+            textOfParagraph.append("\n");
+        }
+        
         for(int i=0;i<articles.size();i++){
             if (typeid(*(articles[i]))==typeid(Paragraph))
             {
                 textOfParagraph.append("#");
             }
             textOfParagraph.append(articles[i]->getText());
-            /**
-            if(typeid(*(articles[i]))==typeid(Text))
-            {
-                textOfParagraph.append(static_cast<Text*>(articles[i])->getText());
-            }else if(typeid(*(articles[i]))==typeid(ListItem))
-            {
-                textOfParagraph.append(static_cast<ListItem*>(articles[i])->getText());
-            }else if (typeid(*(articles[i]))==typeid(Paragraph))
-            {
-                textOfParagraph.append(static_cast<Paragraph*>(articles[i])->getText());
-            }
-            */
+
             if(i!= articles.size()-1)textOfParagraph.append("\n");
         }
         return textOfParagraph;
