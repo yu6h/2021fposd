@@ -32,10 +32,8 @@ TEST_F(CaseParagraph,Text){
 
     EXPECT_EQ("# title\n- list1\n- list2\ntext\n## title2\n- list3\n- list4\nsub text",p.getText());
 
-    Paragraph x(1, "");
-    x.add(new Paragraph(2,"title"));
-    
-    EXPECT_EQ("## title\n",x.getText());
+    Paragraph wakanda(6, "wakanda forever");
+    EXPECT_EQ("###### wakanda forever\n",wakanda.getText());
 }
 TEST_F(CaseParagraph,Exception){
     EXPECT_ANY_THROW(new Paragraph(0,"dfdsa"));

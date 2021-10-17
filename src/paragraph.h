@@ -20,17 +20,14 @@ class Paragraph : public Article {
 
     std::string getText() const override {
         std::string textOfParagraph;
-        if(_text.compare("")!=0){
-            textOfParagraph.append("# ");
-            textOfParagraph.append(_text);
-            textOfParagraph.append("\n");
-        }
+        for(int i=0;i<_level;i++)textOfParagraph.append("#");
+        textOfParagraph.append(" ");
+        textOfParagraph.append(_text);
+        textOfParagraph.append("\n");
+
         
         for(int i=0;i<articles.size();i++){
-            if (typeid(*(articles[i]))==typeid(Paragraph))
-            {
-                textOfParagraph.append("#");
-            }
+
             textOfParagraph.append(articles[i]->getText());
 
             if(i!= articles.size()-1)textOfParagraph.append("\n");
