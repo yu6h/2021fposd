@@ -2,6 +2,7 @@
 #include<gtest/gtest.h>
 #include"../src/text.h"
 #include"../src/list_item.h"
+#include"../src/paragraph.h"
 class CaseText: public ::testing::Test{
     protected:
         Text* text;
@@ -21,4 +22,7 @@ TEST_F(CaseText,Text){
 TEST_F(CaseText,Exception){
     EXPECT_ANY_THROW(text->add(new Text("dasd")));
     EXPECT_ANY_THROW(text->add(new ListItem("dfadsf")));
+    EXPECT_ANY_THROW(text->add(new Paragraph(3,"dfadsf")));
+    EXPECT_NO_THROW(text->getLevel());
+    EXPECT_NO_THROW(text->getText());
 }
