@@ -35,7 +35,7 @@ public:
     }
 
     Iterator* createIterator() override {
-        return new CompoundIterator<std::__cxx11::list<Shape *>::iterator>(_shapes.begin(),_shapes.end());
+        return new CompoundIterator<std::list<Shape *>::iterator>(_shapes.begin(),_shapes.end());
     }
 
     void addShape(Shape* shape) override { 
