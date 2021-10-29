@@ -18,6 +18,7 @@ class CaseCompoundShape: public ::testing::Test{
             cs1->addShape(r1);
 
             cs2 = new CompoundShape();
+            c2 = new Circle(12.34567);
             cs2->addShape(c2);
             cs2->addShape(cs1);
 
@@ -35,11 +36,11 @@ TEST_F(CaseCompoundShape, Info) {
     EXPECT_EQ(
         "Compound Shape\n"
         "{\n"
-        "Circle(12.35)\n"
+        "Circle (12.35)\n"
         "Compound Shape\n"
         "{\n"
-        "Circle(1.10)\n"
-        "Rectangle(3.14 4.00)\n"
+        "Circle (1.10)\n"
+        "Rectangle (3.14 4.00)\n"
         "}\n"
         "}",cs2->info()
     );
