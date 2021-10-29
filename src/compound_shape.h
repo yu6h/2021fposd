@@ -45,15 +45,21 @@ public:
     void deleteShape(Shape* shape) override {
         std::list<Shape*>::iterator needToBeDeleted = _shapes.begin();
         int index=0;
+        int flag=0;
         for (Shape* s:_shapes) {
             
             if(s == shape)
             {
+                flag=1;
                 break;
             }
             index++;
         }
-        advance(needToBeDeleted,index);
-        _shapes.erase(needToBeDeleted);
+        if(flag==1)
+        {
+            advance(needToBeDeleted,index);
+            _shapes.erase(needToBeDeleted);
+        }
+        
     }
 };
