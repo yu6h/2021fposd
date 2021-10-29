@@ -49,11 +49,11 @@ public:
             
             if(s == shape)
             {
-
-                advance(needToBeDeleted,index);
-                _shapes.erase(needToBeDeleted);
+                break;
             }
             index++;
         }
+        advance(needToBeDeleted,index);
+        _shapes.erase(needToBeDeleted);
     }
 };
