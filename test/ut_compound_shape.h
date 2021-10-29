@@ -45,3 +45,16 @@ TEST_F(CaseCompoundShape, Info) {
         "}",cs2->info()
     );
 }
+TEST_F(CaseCompoundShape, Delete) {
+    cs1->deleteShape(c1);
+    EXPECT_EQ(
+        "Compound Shape\n"
+        "{\n"
+        "Circle (12.35)\n"
+        "Compound Shape\n"
+        "{\n"
+        "Rectangle (3.14 4.00)\n"
+        "}\n"
+        "}",cs2->info()
+    );
+}
