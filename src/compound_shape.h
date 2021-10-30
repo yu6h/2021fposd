@@ -18,6 +18,10 @@ public:
         return result;
     }
 
+    int getCount() const {
+        return _shapes.size();
+    }
+
     double perimeter() const override {
         double result = 0;
         for (Shape* s:_shapes) {

@@ -27,6 +27,7 @@ public:
     }
 
     Shape* currentItem() const override {
+        if(isDone())throw(std::string("in the end"));
         return *_current;
     }
 
