@@ -15,8 +15,8 @@ class CompoundIterator : public Iterator{
     ForwardIterator _begin;
     ForwardIterator _end;
     
-    std::list<Shape*> myList;
-    std::list<Shape*>::iterator it;
+    std::vector<Shape*> myList;
+    std::vector<Shape*>::iterator it;
     int index;
     
 public:
@@ -40,10 +40,13 @@ public:
     {
         if(typeid(*it)==typeid(CompoundShape)){
             Iterator* x = (*it)->createIterator();
+            x->first();
+            int i = 0;
             while(!x->isDone()){
-                myList.insert(it,x->currentItem());
-                x++;
+                myList.insert(it + (i++),x->currentItem());
+                x->next();
             }
+            delete x;
         }
         it++;     
 
