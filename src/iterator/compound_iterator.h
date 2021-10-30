@@ -15,25 +15,39 @@ class CompoundIterator : public Iterator{
     ForwardIterator _begin;
     ForwardIterator _end;
     
-
+    std::list<Shape*> myList;
+    std::list<Shape*>::iterator it;
+    int index;
     
 public:
     CompoundIterator(ForwardIterator begin, ForwardIterator end):_begin(begin),_end(end)
     {
-
+        myList.assign(begin,end);
+        index=0;
     }
 
-    void first() override { _current = _begin;}
+    void first() override 
+    {
+        it = myList.begin();
+        index=0;
+    }
 
     Shape* currentItem() const override {
-        return *_current;
+        return *it;
     }
 
     void next() override 
     {
-        _current++;
+        if(typeid(*it)==typeid(CompoundShape)){
+            Iterator* x = (*it)->createIterator();
+            while(!x->isDone()){
+                myList.insert(it,x->currentItem());
+                x++;
+            }
+        }
+        it++;     
 
     }
 
-    bool isDone() const override { return _current == _end;}
+    bool isDone() const override { return it == myList.end();}
 };
