@@ -19,7 +19,7 @@ class CompoundIterator : public Iterator{
 public:
     CompoundIterator(ForwardIterator begin, ForwardIterator end):_begin(begin),_end(end)
     {
-        _current = begin;
+        
     }
 
     void first() override 
