@@ -30,10 +30,10 @@ class CaseCompoundShape: public ::testing::Test{
 
 TEST_F(CaseCompoundShape, Info) {
     EXPECT_EQ(
-        "Compound Shape\n"
+        "CompoundShape\n"
         "{\n"
         "Circle (12.35)\n"
-        "Compound Shape\n"
+        "CompoundShape\n"
         "{\n"
         "Circle (1.10)\n"
         "Rectangle (3.14 4.00)\n"
@@ -44,10 +44,10 @@ TEST_F(CaseCompoundShape, Info) {
 TEST_F(CaseCompoundShape, Delete) {
     cs1->deleteShape(c1);
     EXPECT_EQ(
-        "Compound Shape\n"
+        "CompoundShape\n"
         "{\n"
         "Circle (12.35)\n"
-        "Compound Shape\n"
+        "CompoundShape\n"
         "{\n"
         "Rectangle (3.14 4.00)\n"
         "}\n"

@@ -31,7 +31,7 @@ public:
     }
 
     std::string info() const override {
-        std::string result("Compound Shape\n{\n");
+        std::string result("CompoundShape\n{\n");
         for (Shape* s:_shapes) {
             result.append(s->info()).append("\n");
         }
