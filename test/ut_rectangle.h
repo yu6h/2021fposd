@@ -25,9 +25,11 @@ TEST_F(CaseRectangle, Info){
     EXPECT_EQ("Rectangle (5.00 10.00)",Rectangle(5,10).info());
     EXPECT_EQ("Rectangle (5.33 10.00)",Rectangle(5.333,10).info());
 }
+/*
 TEST_F(CaseRectangle, Exception){
     EXPECT_THROW(new Rectangle(-8,5),std::invalid_argument);
     EXPECT_THROW(new Rectangle(8,0),std::invalid_argument);
     EXPECT_THROW(new Rectangle(0,5),std::invalid_argument);
     EXPECT_THROW(new Rectangle(0,0),std::invalid_argument);
 }
+*/

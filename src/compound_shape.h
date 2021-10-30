@@ -35,7 +35,7 @@ public:
     }
 
     Iterator* createIterator() override {
-        return new CompoundIterator<std::list<Shape *>::iterator>(_shapes.begin(),_shapes.end());
+        return new CompoundIterator<std::list<Shape*>::iterator>(_shapes.begin(),_shapes.end());
     }
 
     void addShape(Shape* shape) override { 
@@ -46,6 +46,8 @@ public:
         std::list<Shape*>::iterator needToBeDeleted = _shapes.begin();
         int index=0;
         int flag=0;
+        auto test =*needToBeDeleted;
+        
         for (Shape* s:_shapes) {
             
             if(s == shape)
