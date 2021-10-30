@@ -24,11 +24,7 @@ class CaseCompoundShape: public ::testing::Test{
 
         }
         void TearDown() override{
-            delete cs1;
-            delete cs2;
-            delete c1;
-            delete c2;
-            delete r1;
+
         }
 };
 
