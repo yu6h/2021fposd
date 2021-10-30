@@ -32,6 +32,7 @@ public:
 
     void next() override 
     {
+        if(isDone())throw(std::string("in the end"));
         _current++;
     }
 
