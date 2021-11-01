@@ -111,6 +111,13 @@ TEST_F(CaseCompoundShape, Delete) {
         "{\n"
         "}",cs2->info()
     );
+    //測試刪除不存在的物件時，不能拋出例外
+    EXPECT_NO_THROW(cs2->deleteShape(c1));
+    EXPECT_EQ(
+        "CompoundShape\n"
+        "{\n"
+        "}",cs2->info()
+    );
 }
 
 
