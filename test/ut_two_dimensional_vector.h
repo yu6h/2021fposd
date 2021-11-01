@@ -42,7 +42,7 @@ TEST_F(CaseTwoDimensionalVector,Subtract){
     EXPECT_NEAR(expected.y(),vector1->subtract(*vector2).y(),0.001);
 }
 TEST_F(CaseTwoDimensionalVector,Exeception){
-    EXPECT_THROW(new TwoDimensionalVector(0,0),std::invalid_argument);
-    EXPECT_NO_THROW(new TwoDimensionalVector(0.1,0));
-    EXPECT_NO_THROW(new TwoDimensionalVector(0,-0.001));
+    EXPECT_THROW(TwoDimensionalVector(0,0),std::invalid_argument);
+    EXPECT_NO_THROW(TwoDimensionalVector(0.1,0));
+    EXPECT_NO_THROW(TwoDimensionalVector(0,-0.001));
 }

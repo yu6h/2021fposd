@@ -2,8 +2,7 @@
 #pragma once
 #include"shape.h"
 
-//template<class ShapeConstraint>
-//Shape* selectShape(Shape* shape, ShapeConstraint constraint) { return nullptr;}
+
 template<class ShapeConstraint>
 Shape* selectShape(Shape* shape, ShapeConstraint constraint) {
     Iterator* it = shape->createIterator();
@@ -14,6 +13,6 @@ Shape* selectShape(Shape* shape, ShapeConstraint constraint) {
             break;
         }
     }
-    //delete it;
+    delete it;
     return result;
 }

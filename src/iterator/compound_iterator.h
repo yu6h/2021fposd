@@ -28,13 +28,13 @@ public:
     }
 
     Shape* currentItem() const override {
-        if(isDone())throw(std::string("in the end"));
+        if(isDone())throw(std::string("This CompoundIterator is in the end"));
         return *_current;
     }
 
     void next() override 
     {
-        if(isDone())throw(std::string("in the end"));
+        if(isDone())throw(std::string("This CompoundIterator is in the end"));
         _current++;
     }
 

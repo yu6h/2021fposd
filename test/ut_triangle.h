@@ -22,7 +22,7 @@ TEST_F(CaseTriangle,Perimeter){
     EXPECT_NEAR(12,Triangle(TwoDimensionalVector(3,0),TwoDimensionalVector(0,4)).perimeter(),0.001);
 }
 TEST_F(CaseTriangle,Exception){
-    EXPECT_THROW(new Triangle(TwoDimensionalVector(3,12.433),TwoDimensionalVector(6,24.866)),std::invalid_argument);
-    EXPECT_THROW(new Triangle(TwoDimensionalVector(3,12.433),TwoDimensionalVector(-6,-24.866)),std::invalid_argument);
-    EXPECT_NO_THROW(new Triangle(TwoDimensionalVector(3,12.433),TwoDimensionalVector(-6,-25.866)));
+    EXPECT_THROW(Triangle(TwoDimensionalVector(3,12.433),TwoDimensionalVector(6,24.866)),std::invalid_argument);
+    EXPECT_THROW(Triangle(TwoDimensionalVector(3,12.433),TwoDimensionalVector(-6,-24.866)),std::invalid_argument);
+    EXPECT_NO_THROW(Triangle(TwoDimensionalVector(3,12.433),TwoDimensionalVector(-6,-25.866)));
 }
