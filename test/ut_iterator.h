@@ -7,7 +7,33 @@
 TEST(CaseNullIterator, NullIterator){
     Iterator* it = new NullIterator();
     ASSERT_TRUE(it->isDone());
+
+    try{
+        it->first();
+        FAIL();
+    }catch(std::string e){
+        ASSERT_EQ("This method is not allowed! Because NullIterator doesn't point to any address."
+        ,e);
+    }
+    try{
+        it->currentItem();
+        FAIL();
+    }catch(std::string e){
+        ASSERT_EQ("This method is not allowed! Because NullIterator doesn't point to any address."
+        ,e);
+    }
     delete it;
+
+
+    Circle c(10.0);
+    Iterator* cc = c.createIterator();
+    ASSERT_TRUE(cc->isDone());
+    delete cc;
+
+    Rectangle r(10.0,80.0);
+    Iterator* rr = r.createIterator();
+    ASSERT_TRUE(rr->isDone());
+    delete rr;
 }
 TEST(CaseCompoundIterator, Iterator) {
     CompoundShape* cs1 = new CompoundShape();
@@ -42,6 +68,21 @@ TEST(CaseCompoundIterator, Iterator) {
 
     it->next();
     EXPECT_TRUE(it->isDone());
+
+    try{
+        it->next();
+        FAIL();
+    }catch(std::string e){
+        EXPECT_EQ("This CompoundIterator is in the end",e);
+    }
+
+    try{
+        it->currentItem();
+        FAIL();
+    }catch(std::string e){
+        EXPECT_EQ("This CompoundIterator is in the end",e);
+    }
+    
 
     delete cs1;
     delete c1;

@@ -27,7 +27,14 @@ TEST_F(CaseRectangle, Info){
 }
 
 TEST_F(CaseRectangle, Exception){
-    EXPECT_THROW(Rectangle(-8,5),std::invalid_argument);
+
+    try{
+        Rectangle rec(-8,5);
+        FAIL();
+    }catch(std::invalid_argument e){
+        ASSERT_STREQ("length and width both cannot less or eqal than zero.", e.what());
+    }
+
     EXPECT_THROW(Rectangle(8,0),std::invalid_argument);
     EXPECT_THROW(Rectangle(0,5),std::invalid_argument);
     EXPECT_THROW(Rectangle(0,0),std::invalid_argument);

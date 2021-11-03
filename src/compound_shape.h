@@ -47,11 +47,12 @@ public:
     }
 
     void deleteShape(Shape* shape) override {
-        for(auto it = _shapes.begin();it!=_shapes.end();){
-            if(*it == shape){
-                it = _shapes.erase(it);
-            }
-            it++;
-        }
+        _shapes.remove(shape);
+        // for(auto it = _shapes.begin();it!=_shapes.end();){
+        //     if(*it == shape){
+        //         it = _shapes.erase(it);
+        //     }
+        //     it++;
+        // }
     }
 };

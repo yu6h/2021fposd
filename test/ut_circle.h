@@ -28,6 +28,14 @@ TEST_F(CaseCircle,Info){
     EXPECT_EQ("Circle (11.21)",Circle(11.2111).info());
 }
 TEST_F(CaseCircle,Exception){
+
+    //
+    try{
+        Circle rec(-9);
+        FAIL();
+    }catch(std::invalid_argument e){
+        ASSERT_STREQ("radius cannot less or eqal than zero.", e.what());
+    }
     EXPECT_THROW(Circle(-5),std::invalid_argument);
     EXPECT_THROW(Circle(0),std::invalid_argument);
     EXPECT_NO_THROW(Circle(0.001));
