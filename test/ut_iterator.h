@@ -22,6 +22,13 @@ TEST(CaseNullIterator, NullIterator){
         ASSERT_EQ("This method is not allowed! Because NullIterator doesn't point to any address."
         ,e);
     }
+    try{
+        it->first();
+        FAIL();
+    }catch(std::string e){
+        ASSERT_EQ("This method is not allowed! Because NullIterator doesn't point to any address."
+        ,e);
+    }
     delete it;
 
 
@@ -58,6 +65,8 @@ TEST(CaseCompoundIterator, Iterator) {
 
     it0->next();
     EXPECT_TRUE(it0->isDone());
+
+    delete it0;
     //測試cs2的CompoundIterator
     Iterator* it = cs2->createIterator();
     it->first();
@@ -82,6 +91,7 @@ TEST(CaseCompoundIterator, Iterator) {
     }catch(std::string e){
         EXPECT_EQ("This CompoundIterator is in the end",e);
     }
+    delete it;
     
 
     delete cs1;
