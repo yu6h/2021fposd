@@ -16,7 +16,9 @@ class Paragraph : public Article {
     }
 
     ~Paragraph() {}
-
+    std::string getHtml() const override {
+        return std::string("<");
+    }
     std::string getText() const override {
         std::string textOfParagraph;
         for(int i=0;i<_level;i++)textOfParagraph.append("#");
@@ -33,6 +35,7 @@ class Paragraph : public Article {
         }
         return textOfParagraph;
     }
+
 
 
 

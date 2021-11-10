@@ -13,6 +13,8 @@ class Article {
 
     virtual std::string getText() const = 0;
 
+    virtual std::string getHtml() const = 0;
+
     virtual int getLevel() const {return _level;}
 
     virtual Iterator* createIterator() = 0;

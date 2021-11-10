@@ -1,5 +1,5 @@
 #include<gtest/gtest.h>
-
+#include "./visitor/ut_html_visitor.h"
 #include "./ut_text.h"
 #include "./iterator/ut_compound_iterator.h"
 #include "./iterator/ut_null_iterator.h"
