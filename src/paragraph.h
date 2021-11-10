@@ -5,6 +5,7 @@
 #include<vector>
 #include"iterator/compound_iterator.h"
 #include"visitor/article_visitor.h"
+#include <iostream>   // std::cout
 
 class Paragraph : public Article {
     private:
@@ -14,10 +15,11 @@ class Paragraph : public Article {
     {
         if(!(level>=1 && level<=6))throw std::string("Paragraph Constructor:wrong level parameter");
     }
-
+    std::string getHtml() const override {return "<li>"+_text+"</li>";}
     ~Paragraph() {}
     std::string getHtml() const override {
-        return std::string("<");
+        return string("<h").append(std::to_string(getLevel())).append("></h").append(std::to_string(getLevel())).append(">");
+        return "<h"+std::to_string(getLevel())+"></h"++std::to_string(getLevel())+">";
     }
     std::string getText() const override {
         std::string textOfParagraph;
