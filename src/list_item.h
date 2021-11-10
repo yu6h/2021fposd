@@ -11,9 +11,7 @@ class ListItem : public Article {
     std::string getText() const override{
         return "- "+_text;
     }
-    std::string getHtml() const override {
-        return "<span>"+_text+"</span>";
-    }
+
     void add(Article* dpFormat) override{
         throw std::string("method not allowed");
     }

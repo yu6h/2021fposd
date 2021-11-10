@@ -13,7 +13,7 @@ class Article {
 
     virtual std::string getText() const = 0;
 
-    virtual std::string getHtml() const = 0;
+    virtual std::string getTextAttribute() const {return _text;}
 
     virtual int getLevel() const {return _level;}
 

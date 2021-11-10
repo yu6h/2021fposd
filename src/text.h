@@ -10,7 +10,7 @@ class Text : public Article {
 
     std::string getText() const override {return _text;}
 
-    std::string getHtml() const override {return "<li>"+_text+"</li>";}
+
 
     Iterator* createIterator() override {
         return new NullIterator();
