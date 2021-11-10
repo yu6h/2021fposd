@@ -1,33 +1,29 @@
-// you should define a template class or type `ForwardIterator`
+#pragma once
 #pragma once
 #include"null_iterator.h"
 #include<list>
 #include<vector>
 #include <typeinfo>
-class Shape;
+class Article;
 class CompoundShape;
 
 template<class ForwardIterator>
-class CompoundIterator : public Iterator{
+class CompoundIterator : public Iterator {
     private:
-
     ForwardIterator _current;
     ForwardIterator _begin;
     ForwardIterator _end;
-    
-    
-public:
+   public:
     CompoundIterator(ForwardIterator begin, ForwardIterator end):_begin(begin),_end(end)
     {
+        first();
+    }
+
+    void first() override {
         _current = _begin;
     }
 
-    void first() override 
-    {
-        _current = _begin;
-    }
-
-    Shape* currentItem() const override {
+    Article* currentItem() const override {
         if(isDone())throw(std::string("This CompoundIterator is in the end"));
         return *_current;
     }
