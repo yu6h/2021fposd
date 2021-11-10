@@ -1,6 +1,6 @@
 #pragma once
 #include<gtest/gtest.h>
-#include"../../src/visitor/markdown_visitor.cpp"
+
 TEST(CaseVisitor2, MarkdownVisitorTest){
     Paragraph p(1, "title");
     p.add(new ListItem("list1"));
