@@ -9,5 +9,5 @@ class MarkdownVisitor : public ArticleVisitor {
 
     void visitParagraph(Paragraph* p) override;
 
-    std::string getResult() const override;
+
 };

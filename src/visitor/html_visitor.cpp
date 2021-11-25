@@ -29,7 +29,5 @@ void HtmlVisitor::visitParagraph(Paragraph* p) {
     }
     _text.append("</div>");
 }
-std::string HtmlVisitor::getResult() const {
-    return _text;
-}
+
 

@@ -16,6 +16,3 @@ void MarkdownVisitor::visitText(Text* t) {
 void MarkdownVisitor::visitParagraph(Paragraph* p){
     _text.append(p->getText()).append("\n");
 }
-std::string MarkdownVisitor::getResult() const {
-    return _text;
-}
