@@ -17,11 +17,12 @@ TEST(CaseVisitor, ShapeInfoVisitor)
     CompoundShape *cs3 = new CompoundShape();
     cs3->addShape(new Circle(5.5));
     cs3->addShape(cs2);
+    cs3->addShape(new Rectangle(5.3, 66));
 
     CompoundShape *cs4 = new CompoundShape();
     cs4->addShape(new Rectangle(87, 66));
     cs4->addShape(cs3);
-
+    cs4->addShape(new Rectangle(5.5, 66));
     ShapeInfoVisitor *visitor = new ShapeInfoVisitor();
     cs2->accept(visitor);
     EXPECT_EQ("CompoundShape{\n"
@@ -45,6 +46,7 @@ TEST(CaseVisitor, ShapeInfoVisitor)
               "      Rectangle (3.14 4.00)\n"
               "    }\n"
               "  }\n"
+              "  Rectangle (5.30 66.00)\n"
               "}\n",
               visitor->getResult());
     std::cout << visitor->getResult() << std::endl;
@@ -61,7 +63,9 @@ TEST(CaseVisitor, ShapeInfoVisitor)
               "        Rectangle (3.14 4.00)\n"
               "      }\n"
               "    }\n"
+              "    Rectangle (5.30 66.00)\n"
               "  }\n"
+              "  Rectangle (5.50 66.00)\n"
               "}\n",
               visitor->getResult());
     std::cout << visitor->getResult() << std::endl;
