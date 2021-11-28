@@ -18,18 +18,22 @@ TEST(CaseVisitor, ShapeInfoVisitor)
     cs3->addShape(new Circle(5.5));
     cs3->addShape(cs2);
 
+    CompoundShape *cs4 = new CompoundShape();
+    cs4->addShape(new Rectangle(87, 66));
+    cs4->addShape(cs3);
+
     ShapeInfoVisitor *visitor = new ShapeInfoVisitor();
-    // cs2->accept(visitor);
-
-    // EXPECT_EQ("CompoundShape{\n"
-    //           "  Circle (12.35)\n"
-    //           "  CompoundShape{\n"
-    //           "    Circle (1.10)\n"
-    //           "    Rectangle (3.14 4.00)\n"
-    //           "  }\n"
-    //           "}\n",
-    //           visitor->getResult());
-
+    cs2->accept(visitor);
+    EXPECT_EQ("CompoundShape{\n"
+              "  Circle (12.35)\n"
+              "  CompoundShape{\n"
+              "    Circle (1.10)\n"
+              "    Rectangle (3.14 4.00)\n"
+              "  }\n"
+              "}\n",
+              visitor->getResult());
+    std::cout<<visitor->getResult()<<std::endl;
+    
     cs3->accept(visitor);
 
     EXPECT_EQ("CompoundShape{\n"
@@ -43,5 +47,22 @@ TEST(CaseVisitor, ShapeInfoVisitor)
               "  }\n"
               "}\n",
               visitor->getResult());
-    std::cout<<visitor->getResult()<<std::endl;
+    std::cout << visitor->getResult() << std::endl;
+
+    cs4->accept(visitor);
+    EXPECT_EQ("CompoundShape{\n"
+              "  Rectangle (87.00 66.00)\n"
+              "  CompoundShape{\n"
+              "    Circle (5.50)\n"
+              "    CompoundShape{\n"
+              "      Circle (12.35)\n"
+              "      CompoundShape{\n"
+              "        Circle (1.10)\n"
+              "        Rectangle (3.14 4.00)\n"
+              "      }\n"
+              "    }\n"
+              "  }\n"
+              "}\n",
+              visitor->getResult());
+    std::cout << visitor->getResult() << std::endl;
 }

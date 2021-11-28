@@ -26,21 +26,17 @@ public:
     void visitCompoundShape(CompoundShape *compoundShape)
     {
         if(depth == 0) result = "";
-
         Iterator *it = compoundShape->createIterator();
-
         depth++;
         result.append("CompoundShape{\n");
         for (it->first(); !it->isDone(); it->next())
         {
-            for (int i = 0; i < depth; i++)
-                result.append("  ");
+            for (int i = 0; i < depth; i++)result.append("  ");
             it->currentItem()->accept(this);
         }
         depth--;
         for (int i = 0; i < depth; i++)result.append("  ");
         result.append("}\n");
-        
     }
     std::string getResult()
     {
