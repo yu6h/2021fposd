@@ -30,12 +30,13 @@ public:
 
     std::string info() const override
     {
-        std::string result("CompoundShape\n{\n");
-        for (Shape *s : _shapes)
-        {
-            result.append(s->info()).append("\n");
-        }
-        return result.append("}");
+        // std::string result("CompoundShape\n{\n");
+        // for (Shape *s : _shapes)
+        // {
+        //     result.append(s->info()).append("\n");
+        // }
+        // return result.append("}");
+        return "CompoundShape";
     }
 
     void accept(ShapeVisitor *visitor) override

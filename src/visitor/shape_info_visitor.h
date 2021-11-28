@@ -26,7 +26,7 @@ public:
     void visitCompoundShape(CompoundShape *compoundShape)
     {
 
-        for (int i = 1; i < depth; i++)result.append("\t");
+        for (int i = 1; i < depth; i++)result.append("  ");
         result.append("CompoundShape{\n");
 
         Iterator *it = compoundShape->createIterator();
@@ -36,13 +36,13 @@ public:
         for (it->first(); !it->isDone(); it->next())
         {
             for (int i = 0; i < depth; i++)
-                result.append("\t");
+                result.append("  ");
             it->currentItem()->accept(this);
         }
 
         depth--;
 
-        for (int i = 0; i < depth; i++)result.append("\t");
+        for (int i = 0; i < depth; i++)result.append("  ");
         result.append("}\n");
     }
     std::string getResult()

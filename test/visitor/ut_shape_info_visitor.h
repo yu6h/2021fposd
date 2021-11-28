@@ -18,5 +18,5 @@ TEST(CaseVisitor, ShapeInfoVisitor)
     ShapeInfoVisitor *visitor = new ShapeInfoVisitor();
     cs2->accept(visitor);
 
-    EXPECT_EQ("CompoundShape{\n\tCircle (12.35)\n\tCompoundShape{\n\t\tCircle (1.10)\n\t\tRectangle (3.14 4.00)\n\t}\n}\n",visitor->getResult());
+    EXPECT_EQ("CompoundShape{\n  Circle (12.35)\n  CompoundShape{\n    Circle (1.10)\n    Rectangle (3.14 4.00)\n  }\n}\n",visitor->getResult());
 }
