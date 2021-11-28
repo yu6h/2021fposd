@@ -2,7 +2,7 @@
 #include "../src/compound_shape.h"
 #include "../src/rectangle.h"
 #include <gtest/gtest.h>
-
+#include "../src/visitor/shape_info_visitor.h"
 class CaseCompoundShape : public ::testing::Test
 {
 protected:
@@ -44,77 +44,77 @@ protected:
 TEST_F(CaseCompoundShape, Info)
 {
     EXPECT_EQ(
-        "CompoundShape\n"
-        "{\n"
-        "Circle (1.10)\n"
-        "Circle (12.35)\n"
-        "CompoundShape\n"
-        "{\n"
-        "Circle (1.10)\n"
-        "Rectangle (3.14 4.00)\n"
-        "Circle (1.10)\n"
-        "Circle (1.10)\n"
-        "}\n"
-        "Circle (1.10)\n"
-        "}",
+        // "CompoundShape\n"
+        // "{\n"
+        // "Circle (1.10)\n"
+        // "Circle (12.35)\n"
+        // "CompoundShape\n"
+        // "{\n"
+        // "Circle (1.10)\n"
+        // "Rectangle (3.14 4.00)\n"
+        // "Circle (1.10)\n"
+        // "Circle (1.10)\n"
+        // "}\n"
+        // "Circle (1.10)\n"
+        // "}",
+        "CompoundShape",
         cs2->info());
 }
 TEST_F(CaseCompoundShape, Delete)
 {
+    ShapeInfoVisitor visitor;
     cs2->deleteShape(c1);
+    cs2->accept(&visitor);
     EXPECT_EQ(
-        "CompoundShape\n"
-        "{\n"
-        "Circle (12.35)\n"
-        "CompoundShape\n"
-        "{\n"
-        "Circle (1.10)\n"
-        "Rectangle (3.14 4.00)\n"
-        "Circle (1.10)\n"
-        "Circle (1.10)\n"
-        "}\n"
-        "Circle (1.10)\n"
-        "}",
-        cs2->info());
+        "CompoundShape{\n"
+        "  Circle (12.35)\n"
+        "  CompoundShape{\n"
+        "    Circle (1.10)\n"
+        "    Rectangle (3.14 4.00)\n"
+        "    Circle (1.10)\n"
+        "    Circle (1.10)\n"
+        "  }\n"
+        "  Circle (1.10)\n"
+        "}\n",
+        visitor.getResult());
+
     cs2->deleteShape(c1);
+    cs2->accept(&visitor);
     EXPECT_EQ(
-        "CompoundShape\n"
-        "{\n"
-        "Circle (12.35)\n"
-        "CompoundShape\n"
-        "{\n"
-        "Rectangle (3.14 4.00)\n"
-        "Circle (1.10)\n"
-        "Circle (1.10)\n"
-        "}\n"
-        "Circle (1.10)\n"
-        "}",
-        cs2->info());
+        "CompoundShape{\n"
+        "  Circle (12.35)\n"
+        "  CompoundShape{\n"
+        "    Rectangle (3.14 4.00)\n"
+        "    Circle (1.10)\n"
+        "    Circle (1.10)\n"
+        "  }\n"
+        "  Circle (1.10)\n"
+        "}\n",
+        visitor.getResult());
+
     cs2->deleteShape(c1);
+    cs2->accept(&visitor);
     EXPECT_EQ(
-        "CompoundShape\n"
-        "{\n"
-        "Circle (12.35)\n"
-        "CompoundShape\n"
-        "{\n"
-        "Rectangle (3.14 4.00)\n"
-        "Circle (1.10)\n"
-        "}\n"
-        "Circle (1.10)\n"
-        "}",
-        cs2->info());
+        "CompoundShape{\n"
+        "  Circle (12.35)\n"
+        "  CompoundShape{\n"
+        "    Rectangle (3.14 4.00)\n"
+        "    Circle (1.10)\n"
+        "  }\n"
+        "  Circle (1.10)\n"
+        "}\n",
+        visitor.getResult());
     cs2->deleteShape(c1);
+    cs2->accept(&visitor);
     EXPECT_EQ(
-        "CompoundShape\n"
-        "{\n"
-        "Circle (12.35)\n"
-        "CompoundShape\n"
-        "{\n"
-        "Rectangle (3.14 4.00)\n"
-        "Circle (1.10)\n"
-        "}\n"
-        "}",
-        cs2->info());
+        "CompoundShape{\n"
+        "  Circle (12.35)\n"
+        "  CompoundShape{\n"
+        "    Rectangle (3.14 4.00)\n"
+        "    Circle (1.10)\n"
+        "  }\n"
+        "}\n",
+        visitor.getResult());
     // cs2->deleteShape(c1);
     // EXPECT_EQ(
     //     "CompoundShape\n"

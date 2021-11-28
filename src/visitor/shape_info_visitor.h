@@ -25,6 +25,7 @@ public:
     }
     void visitCompoundShape(CompoundShape *compoundShape)
     {
+        if(depth == 0) result = "";
 
         for (int i = 1; i < depth; i++)result.append("  ");
         result.append("CompoundShape{\n");
@@ -49,7 +50,6 @@ public:
     {
         return result;
     }
-
 private:
     int depth = 0;
     std::string result = "";
