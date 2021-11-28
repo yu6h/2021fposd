@@ -12,7 +12,7 @@ class Triangle : public Shape {
     Triangle(TwoDimensionalVector vec1, TwoDimensionalVector vec2)
         : _vec1(vec1), _vec2(vec2)
         {
-            //if(vec1.cross(vec2)==0) throw std::invalid_argument("the two vectors are parallel");
+            if(vec1.cross(vec2)==0) throw std::invalid_argument("the two vectors are parallel");
         }
 
     double area() const override {return abs(_vec1.cross(_vec2)/2);}
