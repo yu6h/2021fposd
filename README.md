@@ -1,173 +1,135 @@
-# Pattern Oriented Software Design 2021 Fall Lab1
+# Pattern Oriented Software Design 2021 Fall Assignment
 
-## Lab1
+## Assignment List
+- [Assignment 1:](Assignment1.md) Due 10/06
+- [Assignment 2:](Assignment2.md) Due 10/18
+- [Assignment 3:](Assignment3.md) Due 11/04
+- [Assignment 4:](Assignment4.md) Due 12/01
 
-__Deadline__: 11/10 18:00~21:00
+## Assignment 4
 
-The folders src/ and test/ in this repo contain the template code of this exam, which is just the skeleton. You need to finish the implementation. 
+__Deadline__: 12/01 23:59.
 
-For this test, you are asked to implement a multipurpose document generator for markdown and html. In this system, there are three abstract classes `Article`, `Iterator` and `ArticleVisitor` which are responsible for document, data traversal and generating document representation, respectively.
+The folders `src/` and `test/` in this repo contain the template code of the
+assignment, which is just the skeleton. 
+You need to finish the implementation by yourself. 
+
+For this assignment, you are asked to implement `Visitor` pattern.
 
 Please add to the skeleton code so that it meets the specifications below.
+- The specs of `Shape`, `Circle`, `Rectangle`, `Triangle` and 
+  `TwoDimensionalVector` is extended from the assignment 3.
+- abstract class `Shape`, which has a pure virtual function `accept` and `info`.
+- function `accept` takes a visitor as parameter and visit the shape.
+- function `info` returns a string that describes the shape.
+  - `Circle` returns "Circle (${radius})".
+  - `Rectangle` returns "Rectangle (${length}, ${width})".
+  - `Triangle` returns "Triangle (${vec1.info()}, ${vec2.info()})".
+  - `CompoundShape` returns "CompoundShape".
+- class `CompoundShape`, which deletes first matching Shape object in function 
+  `deleteShape`, and it will traverse all its descendants.
+---
+- The specs of `Iterator` is extended from the assignment 3, you should keep all
+iterator functionality work in this assignment.
+---
+- Abstract class `ShapeVisitor` defines four pure virtual functions `visitCircle`,
+  `visitRectangle`, `visitTriangle` and `visitCompoundShape`.
+- Class `ShapeInfoVisitor` is derived from `ShapeVisitor`, implements all pure
+  functions defined in `ShapeVisitor`.
+- Class `ShapeInfoVisitor` generates shape info in following rule:
+  - when visit `Circle`, visitor generates "Circle (${radius})\n".
+  - when visit `Rectangle`, visitor generates "Rectangle (${length}, ${width})\n".
+  - when visit `Triangle`, visitor generates "Triangle (${vec1.info()}, ${vec2.info()})
+    \n".
+  - when visit `CompoundShape`, visitor wraps children's info with `CompoundShape{\n...}\n`
+    and adds indent by their depth in the compound tree.
+---
+- TA will only check `ShapeVisitor`, `accept()`, `info()`, `deleteShape()`, but you still needs to keep all legacy system work.
 
-#### `Article`
-- The abstract class `Article` has five methods `getText()`, `getLevel()`,
-  `add()`, `createIterator()` and `accept()`.
-- The classes `Text`, `Paragraph` and `ListItem` are subclasses derived from
-  abstract class `Article`.
-- Class `Text` has the string data member `text` and a constant
-  level of 0. Calling `getText()` returns `text`, calling `add()` throws an
-  exception, and calling `createIterator()` returns a `NullIterator`.
-- Class `ListItem` has the string data member `text` and a constant level of 0.
-  Calling `getText()` returns `text`,  calling `add()` throws
-  an exception, and calling `createIterator()` returns a `NullIterator`.
-- Class `Paragraph` has the string data member `text` and a non-constant level 
-  greater or equal than 1 but smaller than or equal to 6. A `Paragraph` object can aggregate an arbitrary number of `Article` objects. Calling `getText()` returns its own `text`. Calling `createIterator()` returns a `CompoundIterator`.
-- A `Paragraph` object of level _m_ can be added to a `Paragraph` object of level _n_ only if _m_ is greater than _n_; otherwise, an exception is thrown.
 
-#### `Iterator`
-- Abstract class `Iterator`, which defines four pure virtual functions `first`, 
-  `currentItem`, `next` and `isDone`.
-- Both class `NullIterator` and `CompoundIterator` are derived from
-  `Iterator`. They should implement all pure virtual functions defined in 
-  `Iterator`.
-- Class `NullIterator` doesn't point to any object, so it will throw 
-  exception when its functions `first`, `currentItem` and `next` are called. 
-  The function `isDone` always return `true`.
-- Class `CompoundIterator` has a constructor that is called by an object of class `Paragraph`, which passes in the begin and the end position of the `Article` objects it aggregates. Further,
-  - Class `CompoundIterator` defines template \<class ForwardIterator> as the type parameter for the begin and the end position:  
-    ``` c++
-    template <class ForwardIterator>
-    class CompoundIterator : public Iterator {
-      CompoundIterator(ForwardIterator begin, ForwardIterator end) ...
-      ...
-    };
-    ```
-  - A `CompoundIterator` object points to the begin position when it is created.
-  - A `CompoundIterator` object points to the begin position with function `first`. 
-  - A `CompoundIterator` object points to next item with function `next`, and it will throw exception if it already points to the end position.
-  - A `CompoundIterator` object returns the current pointed-to item in function `currentItem`, and it will throw exception if it points to the end position.
-  - A `CompoundIterator` object returns `true` if it points to the end position with function `isDone`.
-
- _Hint: The type parameter `ForwardIterator` should be able to accept iterators created by vector or list in the standard template library._
-
-#### `ArticleVisitor`
-- Abstract class `ArticleVisitor` defines four pure virtual functions 
-  `visitListItem`, `visitText`, `visitParagraph` and `getResult`.
-- Classes `MarkdownVisitor` and `HtmlVisitor`, both of which are derived from
-  `ArticleVisitor`, implement all pure functions defined in `ArticleVisitor`.
-- Class `MarkdownVisitor` generates markdown document in following rule:
-  - it generates `- ${text}\n` when visiting `ListItem`
-  - it generates `${text}\n` when visiting `Text`
-  - when visiting `Paragraph`, first, a numbers of '#' equal to `level` is prefixed to its own `text`; `texts` of the `Article` objects it aggregates are then joined, finally, the whole string is postfixed with '\n'.
-- Class `HtmlVisitor` generate html document in following rule:
-  - it generates `<li>${text}</li>` when visiting `ListItem`
-  - it generates `<span>${text}</span>` when visiting `Text`
-  - when visiting `Paragraph`, first, wrap `text` inside tags `<h${level}>...</h${level}>`, where `level` is the level of the `Paragraph` object; second, join the results generated for the `Article` objects it aggregates and wrap then inside tags `<div> ...</div>`.
-
-#### MarkdownVisitor Example:
+#### Example:
 
 ``` c++
-  Paragraph p(1, "title");
-  p.add(new ListItem("list1"));
-  p.add(new ListItem("list2"));
-  p.add(new Text("text"));
-  Paragraph* p2 = new Paragraph(2, "title2");
-  p2->add(new ListItem("list3"));
-  p2->add(new ListItem("list4"));
-  p2->add(new Text("sub text"));
-  p.add(p2);
-  MarkdownVisitor visitor;
-  p.accept(&visitor);
+  CompoundShape* cs1 = new CompoundShape();
+  cs1->addShape(new Circle(1.1));
+  cs1->addShape(new Rectangle(3.14 ,4));
+
+  CompoundShape* cs2 = new CompoundShape();
+  cs2->addShape(new Circle(12.34567))
+  cs2->addShape(cs1);
+
+  ShapeInfoVisitor visitor;
+  cs2.accept(&visitor);
+
 ```
 
 result of `visitor.getResult()`(don't print '\n', it just remind you there has a \n)
 ```
-# title\n
-- list1\n
-- list2\n
-text\n
-## title2\n
-- list3\n
-- list4\n
-sub text\n
-```
-
-#### HtmlVisitor Example:
-
-``` c++
-  Paragraph p(1, "title");
-  p.add(new ListItem("list1"));
-  p.add(new ListItem("list2"));
-  p.add(new Text("text"));
-  Paragraph* p2 = new Paragraph(2, "title2");
-  p2->add(new ListItem("list3"));
-  p2->add(new ListItem("list4"));
-  p2->add(new Text("sub text"));
-  p.add(p2);
-  HtmlVisitor visitor;
-  p.accept(&visitor);
-```
-
-result of `visitor.getResult()`
-```
-<div><h1>title</h1><li>list1</li><li>list2</li><span>text</span><div><h2>title2</h2><li>list3</li><li>list4</li><span>sub text</span></div></div>
+CompoundShape{\n
+  Circle (12.35)\n
+  CompoundShape{\n
+    Circle (1.10)\n
+    Rectangle (3.14 4.00)\n
+  }\n
+}\n
 ```
 
 #### Notes:
-- If your code fails to compile on the [Jenkins](https://ssl-jenkins.csie.ntut.edu.tw/) server, you'll get **NO POINT** for
-the test.
+- If your code fails to compile on the Jenkins server, you'll get **NO POINT** 
+  for the assignment.
 - Your program should be able to handle unexpected input data, that is, you
-should do error handling if necessary.
-- You should make your unit test fail if the program that should throw an exception
-runs without throwing one.
+  should do error handling if necessary.
+- You should make your unit test fail if the program that should throw an 
+  exception runs without throwing one.
 - When writing unit tests, you should take as many situations as possible into
-consideration.
-- Any submission after end time of test will not be graded.
-- Commit and push your code early and often.
+  consideration.
+- Discussion is encouraged but the pushed code must be your own.
+- Any submission after deadline will not be graded.
+- You don't need to delete the tests written before.
+- Remember to **RELEASE THE SPACE** you allocate after using it.
 
 ### Grading Rubrics
-1. Unit tests written by yourself: 30%.
-2. Unit tests written by TA: 30%.
-3. Correctly implement Visitor Pattern: 20%.
-4. Correctly implement Iterator Pattern: 20%.
+1. Unit tests written by yourself: 50%.
+2. Unit tests written by TA: 50%.
 
 ### File Structure
 
   ```bash
-    .
-    ├── README.md
-    ├── makefile
-    ├── src
-    │   ├── article.h
-    │   ├── iterator
-    │   │   ├── compound_iterator.h
-    │   │   ├── iterator.h
-    │   │   └── null_iterator.h
-    │   ├── list_item.h
-    │   ├── paragraph.h
-    │   ├── text.h
-    │   └── visitor
-    │       ├── article_visitor.h
-    │       ├── html_visitor.h
-    │       └── markdown_visitor.h
-    └── test
-        ├── iterator
-        │   ├── ut_compound_iterator.h
-        │   └── ut_null_iterator.h
-        ├── ut_list_item.h
-        ├── ut_main.cpp
-        ├── ut_paragraph.h
-        ├── ut_text.h
-        └── visitor
-            ├── ut_html_visitor.h
-            └── ut_markdown_visitor.h
+  .
+  ├── makefile
+  ├── src
+  │   ├── circle.h
+  │   ├── compound_shape.h
+  │   ├── iterator
+  │   │   ├── compound_iterator.h
+  │   │   ├── iterator.h
+  │   │   └── null_iterator.h
+  │   ├── rectangle.h
+  │   ├── shape.h
+  │   ├── triangle.h
+  │   ├── two_dimensional_vector.h
+  │   └── visitor
+  │       ├── shape_info_visitor.h
+  │       └── shape_visitor.h
+  └── test
+      ├── iterator
+      │   ├── ut_compound_iterator.h
+      │   └── ut_null_iterator.h
+      ├── ut_circle.h
+      ├── ut_compound_shape.h
+      ├── ut_main.cpp
+      ├── ut_rectangle.h
+      ├── ut_triangle.h
+      ├── ut_two_dimensional_vector.h
+      └── visitor
+          └── ut_shape_info_visitor.h
   ```
 
 ## References
 - [C++.com](http://www.cplusplus.com/reference/)
-- [Dictionary](https://dictionary.cambridge.org/zht/)
-- Your own code from [GitLab](https://ssl-gitlab.csie.ntut.edu.tw)
 
 ## Course Link
 Course Link: https://ssl-gitlab.csie.ntut.edu.tw/yccheng/posd2021f
+
+## Environment Setting
+Tutorial: https://ssl-gitlab.csie.ntut.edu.tw/course/environment_setting.git
