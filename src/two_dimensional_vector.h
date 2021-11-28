@@ -23,7 +23,7 @@ public:
 
     double dot(TwoDimensionalVector vec) const { return _x * vec.x() + _y * vec.y(); }
 
-    double cross(TwoDimensionalVector vec) const { return _x * vec.x() + _y * vec.y(); }
+    double cross(TwoDimensionalVector vec) const { return _x*vec.y() - _y*vec.x(); }
 
     TwoDimensionalVector subtract(TwoDimensionalVector vec) const
     {
