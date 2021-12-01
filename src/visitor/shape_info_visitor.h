@@ -13,14 +13,17 @@ class ShapeInfoVisitor : public ShapeVisitor
 public:
     void visitCircle(Circle *circle)
     {
+        if(depth == 0) result = "";
         result.append(circle->info()).append("\n");
     }
     void visitRectangle(Rectangle *rectangle)
     {
+        if(depth == 0) result = "";
         result.append(rectangle->info()).append("\n");
     }
     void visitTriangle(Triangle *triangle)
     {
+        if(depth == 0) result = "";
         result.append(triangle->info()).append("\n");
     }
     void visitCompoundShape(CompoundShape *compoundShape)

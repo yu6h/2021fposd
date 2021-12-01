@@ -11,8 +11,7 @@ private:
 public:
     TwoDimensionalVector(double x, double y) : _x(x), _y(y)
     {
-        if (x == 0 && y == 0)
-            throw std::invalid_argument("Cannot use Zero Vector");
+        //if (x == 0 && y == 0)throw std::invalid_argument("Cannot use Zero Vector");
     }
 
     double x() const { return _x; }

@@ -61,14 +61,13 @@ public:
 
         //_shapes.remove(shape);
 
-        for(auto it = _shapes.begin();it!=_shapes.end();){
+        for(auto it = _shapes.begin();it!=_shapes.end();it++){
             if(*it == shape){
                 it = _shapes.erase(it);
                 return true;
             }else if(typeid(**it)==typeid(CompoundShape)){
                 if((*it)->deleteShape(shape))return true;
             }
-            it++;
         }
         return false;
     }
