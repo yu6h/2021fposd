@@ -21,7 +21,7 @@ class ShapeBuilder {
 
     void buildTriangle(double x1, double y1, double x2, double y2)
     {
-        _shapes.push_back(new Triangle(TwoDimensionalVector(x1,y1),TwoDimensionalVector(x2,y2)));
+        _shapes.push_back(new Triangle(TwoDimensionalVector(x1,y1),TwoDimensionalVector(x2,y2) ) );
     }
 
     void buildCompoundBegin()
@@ -32,7 +32,8 @@ class ShapeBuilder {
     void buildCompoundEnd()
     {
         std::list<Shape*> components;
-        while(typeid(*_shapes.back()) != typeid(CompoundShape) || (!_shapes.back()->createIterator()->isDone())){
+        while(typeid(*_shapes.back()) != typeid(CompoundShape) || (!_shapes.back()->createIterator()->isDone())&&
+              typeid(*_shapes.back()) == typeid(CompoundShape)){
             components.push_front(_shapes.back());
             _shapes.pop_back();
         }
