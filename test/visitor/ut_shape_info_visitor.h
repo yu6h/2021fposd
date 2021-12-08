@@ -31,9 +31,9 @@ TEST(CaseVisitor, CompoundShape)
     cs4.addShape(&r4);
     ShapeInfoVisitor visitor;
     cs2.accept(&visitor);
-    EXPECT_EQ("CompoundShape{\n"
+    EXPECT_EQ("CompoundShape {\n"
               "  Circle (12.35)\n"
-              "  CompoundShape{\n"
+              "  CompoundShape {\n"
               "    Circle (1.10)\n"
               "    Rectangle (3.14 4.00)\n"
               "  }\n"
@@ -42,11 +42,11 @@ TEST(CaseVisitor, CompoundShape)
     
     cs3.accept(&visitor);
 
-    EXPECT_EQ("CompoundShape{\n"
+    EXPECT_EQ("CompoundShape {\n"
               "  Circle (5.50)\n"
-              "  CompoundShape{\n"
+              "  CompoundShape {\n"
               "    Circle (12.35)\n"
-              "    CompoundShape{\n"
+              "    CompoundShape {\n"
               "      Circle (1.10)\n"
               "      Rectangle (3.14 4.00)\n"
               "    }\n"
@@ -56,13 +56,13 @@ TEST(CaseVisitor, CompoundShape)
               visitor.getResult());
 
     cs4.accept(&visitor);
-    EXPECT_EQ("CompoundShape{\n"
+    EXPECT_EQ("CompoundShape {\n"
               "  Rectangle (87.00 66.00)\n"
-              "  CompoundShape{\n"
+              "  CompoundShape {\n"
               "    Circle (5.50)\n"
-              "    CompoundShape{\n"
+              "    CompoundShape {\n"
               "      Circle (12.35)\n"
-              "      CompoundShape{\n"
+              "      CompoundShape {\n"
               "        Circle (1.10)\n"
               "        Rectangle (3.14 4.00)\n"
               "      }\n"

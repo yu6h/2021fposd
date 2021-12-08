@@ -62,10 +62,10 @@ TEST_F(CaseCompoundShape, Delete)
     ShapeInfoVisitor visitor;
     cs2->accept(&visitor);
     EXPECT_EQ(
-        "CompoundShape{\n"
+        "CompoundShape {\n"
         "  Circle (1.10)\n"
         "  Circle (12.35)\n"
-        "  CompoundShape{\n"
+        "  CompoundShape {\n"
         "    Circle (1.10)\n"
         "    Rectangle (3.14 4.00)\n"
         "    Circle (1.10)\n"
@@ -78,25 +78,10 @@ TEST_F(CaseCompoundShape, Delete)
     cs2->deleteShape(c1);
     cs2->accept(&visitor);
     EXPECT_EQ(
-        "CompoundShape{\n"
+        "CompoundShape {\n"
         "  Circle (12.35)\n"
-        "  CompoundShape{\n"
+        "  CompoundShape {\n"
         "    Circle (1.10)\n"
-        "    Rectangle (3.14 4.00)\n"
-        "    Circle (1.10)\n"
-        "    Circle (1.10)\n"
-        "    Triangle ([3.00,0.00] [0.00,4.00])\n"
-        "  }\n"
-        "  Circle (1.10)\n"
-        "}\n",
-        visitor.getResult());
-
-    cs2->deleteShape(c1);
-    cs2->accept(&visitor);
-    EXPECT_EQ(
-        "CompoundShape{\n"
-        "  Circle (12.35)\n"
-        "  CompoundShape{\n"
         "    Rectangle (3.14 4.00)\n"
         "    Circle (1.10)\n"
         "    Circle (1.10)\n"
@@ -109,9 +94,24 @@ TEST_F(CaseCompoundShape, Delete)
     cs2->deleteShape(c1);
     cs2->accept(&visitor);
     EXPECT_EQ(
-        "CompoundShape{\n"
+        "CompoundShape {\n"
         "  Circle (12.35)\n"
-        "  CompoundShape{\n"
+        "  CompoundShape {\n"
+        "    Rectangle (3.14 4.00)\n"
+        "    Circle (1.10)\n"
+        "    Circle (1.10)\n"
+        "    Triangle ([3.00,0.00] [0.00,4.00])\n"
+        "  }\n"
+        "  Circle (1.10)\n"
+        "}\n",
+        visitor.getResult());
+
+    cs2->deleteShape(c1);
+    cs2->accept(&visitor);
+    EXPECT_EQ(
+        "CompoundShape {\n"
+        "  Circle (12.35)\n"
+        "  CompoundShape {\n"
         "    Rectangle (3.14 4.00)\n"
         "    Circle (1.10)\n"
         "    Triangle ([3.00,0.00] [0.00,4.00])\n"
@@ -122,9 +122,9 @@ TEST_F(CaseCompoundShape, Delete)
     cs2->deleteShape(c1);
     cs2->accept(&visitor);
     EXPECT_EQ(
-        "CompoundShape{\n"
+        "CompoundShape {\n"
         "  Circle (12.35)\n"
-        "  CompoundShape{\n"
+        "  CompoundShape {\n"
         "    Rectangle (3.14 4.00)\n"
         "    Circle (1.10)\n"
         "    Triangle ([3.00,0.00] [0.00,4.00])\n"
@@ -136,9 +136,9 @@ TEST_F(CaseCompoundShape, Delete)
     EXPECT_NO_THROW(cs2->deleteShape(c1));
     cs2->accept(&visitor);
     EXPECT_EQ(
-        "CompoundShape{\n"
+        "CompoundShape {\n"
         "  Circle (12.35)\n"
-        "  CompoundShape{\n"
+        "  CompoundShape {\n"
         "    Rectangle (3.14 4.00)\n"
         "    Circle (1.10)\n"
         "    Triangle ([3.00,0.00] [0.00,4.00])\n"
