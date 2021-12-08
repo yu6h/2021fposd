@@ -31,7 +31,7 @@ public:
         if(depth == 0) result = "";
         Iterator *it = compoundShape->createIterator();
         depth++;
-        result.append("CompoundShape{\n");
+        result.append("CompoundShape {\n");
         for (it->first(); !it->isDone(); it->next())
         {
             for (int i = 0; i < depth; i++)result.append("  ");

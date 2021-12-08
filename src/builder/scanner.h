@@ -20,6 +20,7 @@ public:
                     pos = pos + token.length();
                     result = token;
                     foundIt = true;
+                    break;
                 }
             }
             if (foundIt)break;
@@ -38,7 +39,7 @@ public:
     double nextDouble() {
         std::string s = "";
 
-        while(!isDone()&&!(_input[pos] <= '9' && _input[pos] >= '0')){
+        while((!isDone()) && (!(_input[pos] <= '9' && _input[pos] >= '0'))){
             pos++;
         }
         while(!isDone()){

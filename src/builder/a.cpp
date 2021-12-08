@@ -5,7 +5,7 @@
 int main()
 {
 // Example
-    std::string input = "I Circle eee ,tt{t3.14159a";
+    std::string input = "I Circle eee ,tt{t0.14159a";
     Scanner scanner(input);
     std::string first = scanner.next();      // `first` is "Circle"
     std::cout<<first<<std::endl;
