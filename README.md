@@ -5,47 +5,72 @@
 - [Assignment 2:](Assignment2.md) Due 10/18
 - [Assignment 3:](Assignment3.md) Due 11/04
 - [Assignment 4:](Assignment4.md) Due 12/01
+- [Assignment 5:](Assignment5.md) Due 12/15
 
-## Assignment 4
+## Assignment 5
 
-__Deadline__: 12/01 23:59.
+__Deadline__: 12/15 23:59.
 
 The folders `src/` and `test/` in this repo contain the template code of the
 assignment, which is just the skeleton. 
 You need to finish the implementation by yourself. 
 
-For this assignment, you are asked to implement `Visitor` pattern.
+For this assignment, you are asked to implement `Builder` pattern and practice 
+how to read text from a file in C++.
 
 Please add to the skeleton code so that it meets the specifications below.
 - The specs of `Shape`, `Circle`, `Rectangle`, `Triangle` and 
-  `TwoDimensionalVector` is extended from the assignment 3.
-- abstract class `Shape`, which has a pure virtual function `accept` and `info`.
-- function `accept` takes a visitor as parameter and visit the shape.
-- function `info` returns a string that describes the shape.
-  - `Circle` returns "Circle (${radius})".
-  - `Rectangle` returns "Rectangle (${length}, ${width})".
-  - `Triangle` returns "Triangle (${vec1.info()}, ${vec2.info()})".
-  - `CompoundShape` returns "CompoundShape".
-- class `CompoundShape`, which deletes first matching Shape object in function 
-  `deleteShape`, and it will traverse all its descendants.
+  `TwoDimensionalVector` is extended from the assignment 4.
 ---
 - The specs of `Iterator` is extended from the assignment 3, you should keep all
 iterator functionality work in this assignment.
 ---
-- Abstract class `ShapeVisitor` defines four pure virtual functions `visitCircle`,
-  `visitRectangle`, `visitTriangle` and `visitCompoundShape`.
-- Class `ShapeInfoVisitor` is derived from `ShapeVisitor`, implements all pure
-  functions defined in `ShapeVisitor`.
-- Class `ShapeInfoVisitor` generates shape info in following rule:
-  - when visit `Circle`, visitor generates "Circle (${radius})\n".
-  - when visit `Rectangle`, visitor generates "Rectangle (${length}, ${width})\n".
-  - when visit `Triangle`, visitor generates "Triangle (${vec1.info()}, ${vec2.info()})
-    \n".
-  - when visit `CompoundShape`, visitor wraps children's info with `CompoundShape{\n...}\n`
-    and adds indent by their depth in the compound tree.
+- The specs of `Visitor` is extended from the assignment 4, you should keep all
+iterator functionality work in this assignment.
+- When `ShapeInfoVisitor` visits `CompoundShape`, visitor wraps children's info 
+  with `CompoundShape {\n...}\n` and adds indent by their depth in the compound 
+  tree.
 ---
-- TA will only check `ShapeVisitor`, `accept()`, `info()`, `deleteShape()`, but you still needs to keep all legacy system work.
-
+- class `ShapeBuilder`, which builds `Shape` object with arguments and pushes 
+  the object into a result stack.
+  - when building `Circle`, builder needs **radius**.
+  - when building `Rectangle`, builder needs **length** and **width**.
+  - when building `Triangle`, builder generates a 2D vector by **x1**, **y1** 
+    and the other 2D vector by **x2**, **y2**, and then uses the two vectors to 
+    build `Triangle`.
+  - when building `CompoundShape`, builder pushes a new `CompoundShape` into the 
+    result stack in the beginning, and adds all the `Shape` objects pushed after
+    the `CompoundShape` into the `CompoundShape` in the end.
+  - when `getResult()` is called, builder returns the top of the result stack.
+  - you don't need to verify if arguments are valid in `ShapeBuilder`.
+- class `Scanner`, which scans through the input and extracts doubles and tokens
+  in token list defined by TA.
+  - token list: {"Circle", "Rectangle", "Triangle", "CompoundShape", "(", ")", 
+    "[", "]", "{", "}", ","}
+  - it points to next token in function `next`, and it will throw exception if 
+    it already points to the end position of the input.
+  - it points to next token in function `nextDouble`, and it will throw 
+    exception if it already points to the end position of the input.
+  - it returns the result which checks if it points to the end position of the 
+    input after skipping white space in function `isDone`, where white space 
+    includes " ", "\n" and "\t".
+  - you should ignore the token which is illegal.
+    ```
+    // Example
+    std::string input = "I Circle eee ,tt{t3.14159a";
+    Scanner scanner(input);
+    std::string first = scanner.next();      // `first` is "Circle"
+    std::string second = scanner.next();     // `second` is ","
+    double third = scanner.nextDouble();     // `third` is 3.14159
+    ```
+- class `ShapeParser`, which accepts a file path, that is a relative path of 
+  `makefile`, and uses scanner as well as builder to parse a `Shape` object in 
+  the file.
+  - it creates scanner and builder in the constructor.
+  - it handles the logic of parsing in function `parse`.
+---
+- TA will only check `ShapeBuilder`, `ShapeParser`, `Scanner` and 
+  `ShapeInfoVisitor`, but you still need to keep all legacy system work.
 
 #### Example:
 
@@ -65,9 +90,9 @@ iterator functionality work in this assignment.
 
 result of `visitor.getResult()`(don't print '\n', it just remind you there has a \n)
 ```
-CompoundShape{\n
+CompoundShape {\n
   Circle (12.35)\n
-  CompoundShape{\n
+  CompoundShape {\n
     Circle (1.10)\n
     Rectangle (3.14 4.00)\n
   }\n
@@ -87,6 +112,7 @@ CompoundShape{\n
 - Any submission after deadline will not be graded.
 - You don't need to delete the tests written before.
 - Remember to **RELEASE THE SPACE** you allocate after using it.
+- The folder `test/data/` is not necessary, but you can take it for reference.
 
 ### Grading Rubrics
 1. Unit tests written by yourself: 50%.
@@ -98,6 +124,10 @@ CompoundShape{\n
   .
   ├── makefile
   ├── src
+  │   ├── builder
+  │   │   ├── scanner.h
+  │   │   ├── shape_builder.h
+  │   │   └── shape_parser.h
   │   ├── circle.h
   │   ├── compound_shape.h
   │   ├── iterator
@@ -112,6 +142,10 @@ CompoundShape{\n
   │       ├── shape_info_visitor.h
   │       └── shape_visitor.h
   └── test
+      ├── builder
+      │   ├── ut_scanner.h
+      │   ├── ut_shape_builder.h
+      │   └── ut_shape_parser.h
       ├── iterator
       │   ├── ut_compound_iterator.h
       │   └── ut_null_iterator.h
@@ -127,6 +161,7 @@ CompoundShape{\n
 
 ## References
 - [C++.com](http://www.cplusplus.com/reference/)
+- [std::stack](https://www.cplusplus.com/reference/stack/stack/)
 
 ## Course Link
 Course Link: https://ssl-gitlab.csie.ntut.edu.tw/yccheng/posd2021f

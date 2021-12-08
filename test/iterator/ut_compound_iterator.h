@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 TEST(CaseCompoundIterator, Iterator) {
     CompoundShape* cs1 = new CompoundShape();
     Circle* c1 = new Circle(1.1);

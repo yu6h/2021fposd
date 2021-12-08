@@ -72,13 +72,6 @@ TEST(CaseVisitor, CompoundShape)
               "  Rectangle (5.50 66.00)\n"
               "}\n",
               visitor.getResult());
-
-
-
-
-
-
-
 }
 TEST(CaseVisitor, Circle){
     ShapeInfoVisitor visitor;
