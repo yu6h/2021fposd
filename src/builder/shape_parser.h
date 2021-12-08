@@ -50,11 +50,11 @@ public:
                 _builder->buildRectangle(_scanner->nextDouble(),_scanner->nextDouble());
                 // std::cout<<"endrect"<<std::endl;
             }else if(token == "Triangle"){
-                std::cout<<"找到tri"<<std::endl;
+                // std::cout<<"找到tri"<<std::endl;
                 _builder->buildTriangle(_scanner->nextDouble(),_scanner->nextDouble(),_scanner->nextDouble(),_scanner->nextDouble());
-                _scanner->next();
-                _scanner->next();
-                std::cout<<"endtri"<<std::endl;
+                // _scanner->next();
+                // _scanner->next();
+                // std::cout<<"endtri"<<std::endl;
             }else if(token == "CompoundShape"){
                 _scanner->next(); // ignore {
                 _builder->buildCompoundBegin();

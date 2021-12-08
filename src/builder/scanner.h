@@ -13,10 +13,9 @@ public:
     {
         std::string result = "";
         bool foundIt = false;
-        skipWhiteSpace();
-        while (!isDone())
+        if(isDone())throw std::invalid_argument("It is already in the end.");
+        do 
         {
-            skipWhiteSpace();
             for (auto token : tokenList)
             {
                 if (_input.compare(pos, token.length(), token) == 0)
@@ -31,14 +30,14 @@ public:
                 break;
             else
                 pos++;
-        }
+        }while(!isDone());
 
         return result;
     }
 
     void skipWhiteSpace()
     {
-        while (_input[pos] == ' ' || _input[pos] == '\n')
+        while (_input[pos] == ' ' || _input[pos] == '\n'|| _input[pos] == '\t')
         {
             pos++;
         }
