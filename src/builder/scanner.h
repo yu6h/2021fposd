@@ -46,11 +46,8 @@ public:
     double nextDouble()
     {
         std::string s = "";
-        // if(isDone()) throw std::invalid_argument("It is already in the end.");
-        while ((!isDone()) && (!(_input[pos] <= '9' && _input[pos] >= '0')))
-        {
-            pos++;
-        }
+        if(isDone()) throw std::invalid_argument("It is already in the end.");
+        while (!isDone() && !(_input[pos] <= '9' && _input[pos] >= '0'))pos++;
         while (pos != _input.length())
         {
             if ((_input[pos] <= '9' && _input[pos] >= '0') || _input[pos] == '.')
