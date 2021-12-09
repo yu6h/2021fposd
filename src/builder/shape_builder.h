@@ -32,8 +32,7 @@ class ShapeBuilder {
     void buildCompoundEnd()
     {
         std::list<Shape*> components;
-        while(typeid(*_shapes.back()) != typeid(CompoundShape) || (!_shapes.back()->createIterator()->isDone())&&
-              typeid(*_shapes.back()) == typeid(CompoundShape)){
+        while(typeid(*_shapes.back()) != typeid(CompoundShape) || !_shapes.back()->createIterator()->isDone()){
             components.push_front(_shapes.back());
             _shapes.pop_back();
         }
@@ -42,6 +41,5 @@ class ShapeBuilder {
             compound->addShape(*it);
         }
     }
-
     Shape* getShape() {return _shapes.back();}
 };

@@ -71,8 +71,6 @@ public:
         }
         return false;
     }
-
 private:
     std::list<Shape *> _shapes;
-
 };
