@@ -30,7 +30,7 @@ TEST(CaseVisitor, CompoundShape)
     Rectangle r4(5.5, 66);
     cs4.addShape(&r4);
     ShapeInfoVisitor visitor;
-    cs2.accept(&visitor);
+    visitor.visitCompoundShape(&cs2);
     EXPECT_EQ("CompoundShape {\n"
               "  Circle (12.35)\n"
               "  CompoundShape {\n"
@@ -40,7 +40,8 @@ TEST(CaseVisitor, CompoundShape)
               "}\n",
               visitor.getResult());
     
-    cs3.accept(&visitor);
+    // cs3.accept(&visitor);
+    visitor.visitCompoundShape(&cs3);
 
     EXPECT_EQ("CompoundShape {\n"
               "  Circle (5.50)\n"
@@ -55,7 +56,8 @@ TEST(CaseVisitor, CompoundShape)
               "}\n",
               visitor.getResult());
 
-    cs4.accept(&visitor);
+    // cs4.accept(&visitor);
+    visitor.visitCompoundShape(&cs4);
     EXPECT_EQ("CompoundShape {\n"
               "  Rectangle (87.00 66.00)\n"
               "  CompoundShape {\n"
@@ -76,18 +78,18 @@ TEST(CaseVisitor, CompoundShape)
 TEST(CaseVisitor, Circle){
     ShapeInfoVisitor visitor;
     Circle haha(5.5);
-    haha.accept(&visitor);
+    visitor.visitCircle(&haha);
     EXPECT_EQ(visitor.getResult(),"Circle (5.50)\n");
 }
 TEST(CaseVisitor, Rectangle){
     ShapeInfoVisitor visitor;
     Rectangle spyderman(88.12,99.33);
-    spyderman.accept(&visitor);
+    visitor.visitRectangle(&spyderman);
     EXPECT_EQ(visitor.getResult(),"Rectangle (88.12 99.33)\n");
 }
 TEST(CaseVisitor, Triangle){
     ShapeInfoVisitor visitor;
     Triangle daredevil(TwoDimensionalVector(3,12.433),TwoDimensionalVector(17.56789,-4));
-    daredevil.accept(&visitor);
+    visitor.visitTriangle(&daredevil);
     EXPECT_EQ(visitor.getResult(),"Triangle ([3.00,12.43] [17.57,-4.00])\n");
 }

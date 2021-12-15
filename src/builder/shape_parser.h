@@ -30,6 +30,9 @@ public:
         _scanner = new Scanner(text);
         _builder = new ShapeBuilder();
     }
+    std::string getText(){
+        return text;
+    }
 
     ~ShapeParser() 
     {
@@ -44,9 +47,15 @@ public:
             if(token == "Circle"){
                 _builder->buildCircle(_scanner->nextDouble());
             }else if(token == "Rectangle"){
-                _builder->buildRectangle(_scanner->nextDouble(),_scanner->nextDouble());
+                double d1 = _scanner->nextDouble();
+                double d2 = _scanner->nextDouble();
+                _builder->buildRectangle(d1,d2);
             }else if(token == "Triangle"){
-                _builder->buildTriangle(_scanner->nextDouble(),_scanner->nextDouble(),_scanner->nextDouble(),_scanner->nextDouble());
+                double v1 = _scanner->nextDouble();
+                double v2 = _scanner->nextDouble();
+                double v3 = _scanner->nextDouble();
+                double v4 = _scanner->nextDouble();
+                _builder->buildTriangle(v1,v2,v3,v4);
             }else if(token == "CompoundShape"){
                 _builder->buildCompoundBegin();
             }else if(token == "}"){

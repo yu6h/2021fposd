@@ -6,7 +6,8 @@
 class CompoundShape : public Shape
 {
 public:
-    ~CompoundShape() {}
+    ~CompoundShape() {
+    }
 
     double area() const override
     {
