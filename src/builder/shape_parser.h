@@ -28,7 +28,7 @@ public:
         }
         // std::cout<<text<<std::endl;
         _scanner = new Scanner(text);
-        _builder = new ShapeBuilder();
+        _builder = ShapeBuilder::getInstance();
     }
     std::string getText(){
         return text;
@@ -37,7 +37,7 @@ public:
     ~ShapeParser() 
     {
         delete _scanner;
-        delete _builder;
+        // delete _builder;
     }
 
     void parse() 
