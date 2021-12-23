@@ -15,7 +15,7 @@ class ShapeBuilder
     private:
 
     std::list<Shape*> _shapes;
-
+    static ShapeBuilder _instance;
     ShapeBuilder(){}
     // static int xx;
      
@@ -23,7 +23,6 @@ class ShapeBuilder
     
     static ShapeBuilder* getInstance() 
     {
-        static ShapeBuilder _instance;
         return &_instance;
     }
 
@@ -71,7 +70,7 @@ class ShapeBuilder
 
     void reset() 
     {
-        // _instance = ShapeBuilder();
+        _instance = ShapeBuilder();
     }
 
 };
