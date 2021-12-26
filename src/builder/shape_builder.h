@@ -64,13 +64,14 @@ class ShapeBuilder
 
     Shape* getShape() 
     {
-        Shape * lastShape = _shapes.back();
-        _shapes.pop_back();
+        Shape* lastShape = _shapes.back();
+        // _shapes.pop_back();
         return lastShape;
     }
 
     void reset() 
     {
+        _shapes.clear();
         // ShapeBuilder::_instance = ShapeBuilder();
     }
 

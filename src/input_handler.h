@@ -7,11 +7,23 @@
 #include "./builder/shape_parser.h"
 #include "./visitor/shape_info_visitor.h"
 
-class InputHandler {
-   public:
+class InputHandler
+{
+public:
+    InputHandler():builder(ShapeBuilder::getInstance()),isContinued(true),compoundLevel(0){}
+    enum Choice
+    {
+        ChoiceAddCircle = 1,
+        ChoiceAddRectangle,
+        ChoiceAddTriangle,
+        ChoiceCompound,
+        ChoiceSave,
+        ChoiceExitCompound = 5,
+        ChoiceExit
+    };
     void handle();
 
-   private:
+private:
     void printEditorInstructions();
     void handleEditorInstructions(int instruction);
     void save();
@@ -21,7 +33,9 @@ class InputHandler {
     void printCompoundInstructions();
     void handleCompoundInstructions(int instruction);
     void addCompound();
+    int getInstruction();
 
-    ShapeBuilder* builder = ShapeBuilder::getInstance();
-    bool isContinued = true;
+    ShapeBuilder *builder;
+    bool isContinued;
+    int compoundLevel;
 };
