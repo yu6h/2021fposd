@@ -1,4 +1,3 @@
-#pragma once
 #include "input_handler.h"
 #include <iostream>
 #include <fstream>
@@ -7,11 +6,11 @@ void InputHandler::handle()
     do
     {
         printEditorInstructions();
-        int instruction = getInstruction();
+        int instruction = inputOnlyNumber();
         handleEditorInstructions(instruction);
     } while (isContinued);
 }
-int InputHandler::getInstruction()
+int InputHandler::inputOnlyNumber()
 {
     int instruction;
     while (!(std::cin >> instruction))
@@ -104,8 +103,6 @@ void InputHandler::addCircle()
     {
         std::cout << "Invalid instruction. Please try again." << std::endl;
     }
-
-    
 }
 
 void InputHandler::addRectangle()
@@ -197,7 +194,7 @@ void InputHandler::addCompound()
     do
     {
         printCompoundInstructions();
-        int instruction = getInstruction();
+        int instruction = inputOnlyNumber();
         handleCompoundInstructions(instruction);
     } while (compoundLevel > 0);
     std::cout << "Compound added." << std::endl;

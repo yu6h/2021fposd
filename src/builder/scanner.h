@@ -8,11 +8,8 @@ class Scanner
 {
 public:
     Scanner(std::string input) : _input(input) {}
-
     std::string next()
     {
-        std::string result = "";
-        bool foundIt = false;
         if(isDone())throw std::invalid_argument("It is already in the end.");
         do 
         {
@@ -21,18 +18,12 @@ public:
                 if (_input.compare(pos, token.length(), token) == 0)
                 {
                     pos = pos + token.length();
-                    result = token;
-                    foundIt = true;
-                    break;
+                    return token;
                 }
             }
-            if (foundIt)
-                break;
-            else
-                pos++;
+            pos++;
         }while(!isDone());
-
-        return result;
+        return std::string("");
     }
 
     void skipWhiteSpace()

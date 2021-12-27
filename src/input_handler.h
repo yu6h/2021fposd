@@ -33,7 +33,7 @@ private:
     void printCompoundInstructions();
     void handleCompoundInstructions(int instruction);
     void addCompound();
-    int getInstruction();
+    int inputOnlyNumber();
 
     ShapeBuilder *builder;
     bool isContinued;
