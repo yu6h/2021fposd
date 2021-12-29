@@ -16,6 +16,28 @@ TEST(CaseParser, ParseArticle){
         "<span>This is a text</span>"
         "</div>"
         ,visitor.getResult());
+
+    delete parser;
+    ArticleParser* parser2 = new ArticleParser(".//test//data//complex_paragraph.txt");
+    parser2->parse();
+    Article* article2 = parser->getArticle();
+    // std::cout<<hh->area()<<std::endl;
+    HtmlVisitor visitor2;
+    article2->accept(&visitor2);
+
+    EXPECT_EQ(
+        "<div>"
+        "<h1>This is a complex paragraph</h1>"
+        "<li>This is a list item</li>"
+        "<div>"
+        "<h2>This is an inner paragraph</h2>"
+        "<span>This is an inner text</span>"
+        "<li>This is an inner list item</li>"
+        "</div>"
+        "<span>This is a text</span>"
+        "</div>"
+        ,visitor2.getResult());
+    
     // delete parser;
     // ShapeParser* parser2 = new ShapeParser(".//test//data//complex_compound.txt");
     // parser2->parse();
