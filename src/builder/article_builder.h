@@ -73,7 +73,7 @@ public:
 
     void reset()
     {
-        while(!_articles.empty()) delete _articles.front(), _articles.pop_front();
+        // while(!_articles.empty()) delete _articles.front(), _articles.pop_front();
         _articles.clear();
     }
 };
