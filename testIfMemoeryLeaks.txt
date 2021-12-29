@@ -1,0 +1,2 @@
+sudo apt-get install valgrind
+valgrind --leak-check=full ./ut_all
