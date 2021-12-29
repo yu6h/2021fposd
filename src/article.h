@@ -12,7 +12,7 @@ class Article {
 
     Article(int level,std::string text):_level(level),_text(text){}
 
-    virtual std::string getText() const = 0;
+    virtual std::string getText() const {return _text;}
 
     virtual std::string getTextAttribute() const {return _text;}
 

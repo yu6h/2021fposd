@@ -35,32 +35,17 @@ TEST_F(CaseParagraph,Text){
  
 
     EXPECT_EQ(
-    "# title\n"
-    "- list1\n"
-    "- list2\n"
-    "text\n"
-    "## title2\n"
-    "- list3\n"
-    "- list4\n"
-    "sub text",p->getText());
+    "title",p->getText());
 
     Paragraph wakanda(6, "wakanda forever");
-    EXPECT_EQ("###### wakanda forever\n",wakanda.getText());
+    EXPECT_EQ("wakanda forever",wakanda.getText());
 
     Paragraph *cap= new Paragraph(3, "I cannot do this all day!!");
-    EXPECT_EQ("### I cannot do this all day!!\n",cap->getText());
+    EXPECT_EQ("I cannot do this all day!!",cap->getText());
 
-    p2->add(cap);
+    delete cap;
     EXPECT_EQ(
-    "# title\n"
-    "- list1\n"
-    "- list2\n"
-    "text\n"
-    "## title2\n"
-    "- list3\n"
-    "- list4\n"
-    "sub text\n"
-    "### I cannot do this all day!!\n",p->getText());
+    "title2",p2->getText());
 }
 TEST_F(CaseParagraph,Exception){
     EXPECT_ANY_THROW(Paragraph(0,"I am Loki of Asgard and I am burdened with glorious purpose meaning"));

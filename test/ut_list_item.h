@@ -17,8 +17,8 @@ TEST_F(CaseListItem,Level){
     EXPECT_EQ(0,ListItem("Wakanda Forever!!!").getLevel());
 }
 TEST_F(CaseListItem,Text){
-    EXPECT_EQ("- list1",x->getText());
-    EXPECT_EQ("- Wakanda Forever!!!",ListItem("Wakanda Forever!!!").getText());
+    EXPECT_EQ("list1",x->getText());
+    EXPECT_EQ("Wakanda Forever!!!",ListItem("Wakanda Forever!!!").getText());
 }
 
 TEST_F(CaseListItem,Exception){

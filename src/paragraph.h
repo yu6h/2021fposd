@@ -20,22 +20,7 @@ class Paragraph : public Article {
         if(!(level>=1 && level<=6))throw std::string("Paragraph Constructor:wrong level parameter");
     }
 
-    std::string getText() const override {
-        std::string textOfParagraph;
-        for(int i=0;i<_level;i++)textOfParagraph.append("#");
-        textOfParagraph.append(" ");
-        textOfParagraph.append(_text);
-        textOfParagraph.append("\n");
 
-        
-        for(int i=0;i<int(articles.size());i++){
-
-            textOfParagraph.append(articles[i]->getText());
-
-            if(i!= int(articles.size())-1)textOfParagraph.append("\n");
-        }
-        return textOfParagraph;
-    }
 
 
 

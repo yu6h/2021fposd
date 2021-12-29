@@ -8,10 +8,6 @@ class Text : public Article {
    public:
     Text(std::string text):Article(0,text) {}
 
-    std::string getText() const override {return _text;}
-
-
-
     Iterator* createIterator() override {
         return new NullIterator();
     }
