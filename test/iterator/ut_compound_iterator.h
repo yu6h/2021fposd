@@ -52,9 +52,9 @@ TEST(CaseCompoundIterator, Iterator) {
     delete it;
     
 
-    delete cs1;
-    delete c1;
-    delete r1;
+    // delete cs1;
+    // delete c1;
+    // delete r1;
     delete cs2;
-    delete c2;
+    // delete c2;
 }

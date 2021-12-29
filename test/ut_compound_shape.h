@@ -10,46 +10,48 @@ protected:
     CompoundShape *cs2;
     Circle *c1;
     Circle *c2;
-    Circle *notC1ButTheSameContent;
+    Circle *c3;
     Rectangle *r1;
+    Rectangle *r2;
     Triangle* triangle;
     void SetUp() override
     {
         cs1 = new CompoundShape();
         c1 = new Circle(1.1);
-        notC1ButTheSameContent = new Circle(1.1);
-        
+        cs1->addShape(c1);
         r1 = new Rectangle(3.14, 4);
-        triangle = new Triangle(TwoDimensionalVector(3.0,0),TwoDimensionalVector(0,4.0));
-        cs1->addShape(c1);
         cs1->addShape(r1);
-        cs1->addShape(c1);
-        cs1->addShape(notC1ButTheSameContent);
+        c2 = new Circle(2.5);
+        cs1->addShape(c2);
+        triangle = new Triangle(TwoDimensionalVector(3.0,0),TwoDimensionalVector(0,4.0));
         cs1->addShape(triangle);
-        cs2 = new CompoundShape();
-        c2 = new Circle(12.34567);
 
-        cs2->addShape(c1);
-        cs2->addShape(c2);
+        cs2 = new CompoundShape();
+
+        c3 = new Circle(10.5);
+        cs2->addShape(c3);
         cs2->addShape(cs1);
-        cs2->addShape(c1);
+        r2 = new Rectangle(4,10.5);
+        cs2->addShape( r2);
     }
     void TearDown() override
     {
-        delete cs1;
+        // delete c1;
+        // delete notC1ButTheSameContent;
+        // delete r1;
+        // delete triangle;
+        // delete c2;
+        // delete cs1;
         delete cs2;
-        delete c1;
-        delete c2;
-        delete notC1ButTheSameContent;
-        delete r1;
-        delete triangle;
     }
 };
 TEST_F(CaseCompoundShape, Area){
-    EXPECT_NEAR(1.1*1.1*M_PI*5+12.35*12.35*M_PI+3.14*4+6,cs2->area(),0.5);
+    EXPECT_NEAR(1.1*1.1*M_PI+3.14*4+2.5*2.5*M_PI+6
+    +10.5*10.5*M_PI+4*10.5,cs2->area(),0.5);
 }
 TEST_F(CaseCompoundShape, Perimeter){
-    EXPECT_NEAR(2*1.1*M_PI*5+2*12.35*M_PI+2*(3.14+4)+12,cs2->perimeter(),0.5);
+    EXPECT_NEAR(2*1.1*M_PI+(3.14+4)*2+2*2.5*M_PI+12
+    +2*10.5*M_PI+(4+10.5)*2,cs2->perimeter(),0.5);
 }
 TEST_F(CaseCompoundShape, Info)
 {
@@ -63,86 +65,80 @@ TEST_F(CaseCompoundShape, Delete)
     cs2->accept(&visitor);
     EXPECT_EQ(
         "CompoundShape {\n"
-        "  Circle (1.10)\n"
-        "  Circle (12.35)\n"
+        "  Circle (10.50)\n"
         "  CompoundShape {\n"
         "    Circle (1.10)\n"
         "    Rectangle (3.14 4.00)\n"
-        "    Circle (1.10)\n"
-        "    Circle (1.10)\n"
+        "    Circle (2.50)\n"
         "    Triangle ([3.00,0.00] [0.00,4.00])\n"
         "  }\n"
-        "  Circle (1.10)\n"
+        "  Rectangle (4.00 10.50)\n"
         "}\n",
         visitor.getResult());
     cs2->deleteShape(c1);
     cs2->accept(&visitor);
     EXPECT_EQ(
         "CompoundShape {\n"
-        "  Circle (12.35)\n"
+        "  Circle (10.50)\n"
         "  CompoundShape {\n"
-        "    Circle (1.10)\n"
         "    Rectangle (3.14 4.00)\n"
-        "    Circle (1.10)\n"
-        "    Circle (1.10)\n"
+        "    Circle (2.50)\n"
         "    Triangle ([3.00,0.00] [0.00,4.00])\n"
         "  }\n"
-        "  Circle (1.10)\n"
+        "  Rectangle (4.00 10.50)\n"
         "}\n",
         visitor.getResult());
 
-    cs2->deleteShape(c1);
+    cs2->deleteShape(c2);
     cs2->accept(&visitor);
     EXPECT_EQ(
         "CompoundShape {\n"
-        "  Circle (12.35)\n"
+        "  Circle (10.50)\n"
         "  CompoundShape {\n"
         "    Rectangle (3.14 4.00)\n"
-        "    Circle (1.10)\n"
-        "    Circle (1.10)\n"
         "    Triangle ([3.00,0.00] [0.00,4.00])\n"
         "  }\n"
-        "  Circle (1.10)\n"
+        "  Rectangle (4.00 10.50)\n"
+        "}\n",
+        visitor.getResult());
+    cs2->deleteShape(r1);
+    cs2->accept(&visitor);
+    EXPECT_EQ(
+        "CompoundShape {\n"
+        "  Circle (10.50)\n"
+        "  CompoundShape {\n"
+        "    Triangle ([3.00,0.00] [0.00,4.00])\n"
+        "  }\n"
+        "  Rectangle (4.00 10.50)\n"
         "}\n",
         visitor.getResult());
 
-    cs2->deleteShape(c1);
+    cs2->deleteShape(triangle);
     cs2->accept(&visitor);
     EXPECT_EQ(
         "CompoundShape {\n"
-        "  Circle (12.35)\n"
+        "  Circle (10.50)\n"
         "  CompoundShape {\n"
-        "    Rectangle (3.14 4.00)\n"
-        "    Circle (1.10)\n"
-        "    Triangle ([3.00,0.00] [0.00,4.00])\n"
         "  }\n"
-        "  Circle (1.10)\n"
-        "}\n",
-        visitor.getResult());
-    cs2->deleteShape(c1);
-    cs2->accept(&visitor);
-    EXPECT_EQ(
-        "CompoundShape {\n"
-        "  Circle (12.35)\n"
-        "  CompoundShape {\n"
-        "    Rectangle (3.14 4.00)\n"
-        "    Circle (1.10)\n"
-        "    Triangle ([3.00,0.00] [0.00,4.00])\n"
-        "  }\n"
+        "  Rectangle (4.00 10.50)\n"
         "}\n",
         visitor.getResult());
 
+    cs2->deleteShape(cs1);
+    cs2->accept(&visitor);
+    EXPECT_EQ(
+        "CompoundShape {\n"
+        "  Circle (10.50)\n"
+        "  Rectangle (4.00 10.50)\n"
+        "}\n",
+        visitor.getResult());
     //測試刪除不存在的物件時，不能拋出例外
     EXPECT_NO_THROW(cs2->deleteShape(c1));
     cs2->accept(&visitor);
     EXPECT_EQ(
         "CompoundShape {\n"
-        "  Circle (12.35)\n"
-        "  CompoundShape {\n"
-        "    Rectangle (3.14 4.00)\n"
-        "    Circle (1.10)\n"
-        "    Triangle ([3.00,0.00] [0.00,4.00])\n"
-        "  }\n"
+        "  Circle (10.50)\n"
+        "  Rectangle (4.00 10.50)\n"
         "}\n",visitor.getResult()
     );
 }

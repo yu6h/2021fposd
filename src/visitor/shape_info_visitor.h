@@ -38,6 +38,7 @@ public:
             it->currentItem()->accept(this);
         }
         depth--;
+        delete it;
         for (int i = 0; i < depth; i++)result.append("  ");
         result.append("}\n");
     }

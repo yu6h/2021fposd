@@ -10,18 +10,31 @@
 #include "../triangle.h"
 #include "../two_dimensional_vector.h"
 
-class ShapeBuilder 
+class ShapeBuilder
 {
-    private:
+private:
+    std::list<Shape *> _shapes;
 
-    std::list<Shape*> _shapes;
-    
-    ShapeBuilder(){}
-    // static int xx;
-     
-    public:
-    
-    static ShapeBuilder* getInstance() 
+    ShapeBuilder() {}
+
+    bool isThisCompoundShapeEmpty(Shape* CompoundShape){
+        Iterator* it = CompoundShape->createIterator();
+        if(it->isDone()){
+            delete it;
+            return true;
+        }
+        else{
+            delete it;
+            return false;
+        }
+        
+    }
+public:
+    ~ShapeBuilder()
+    {
+        reset();
+    }
+    static ShapeBuilder *getInstance()
     {
         static ShapeBuilder _instance;
         return &_instance;
@@ -34,12 +47,12 @@ class ShapeBuilder
 
     void buildRectangle(double length, double width)
     {
-        _shapes.push_back(new Rectangle(length,width));
+        _shapes.push_back(new Rectangle(length, width));
     }
 
     void buildTriangle(double x1, double y1, double x2, double y2)
     {
-        _shapes.push_back(new Triangle(TwoDimensionalVector(x1,y1),TwoDimensionalVector(x2,y2) ) );
+        _shapes.push_back(new Triangle(TwoDimensionalVector(x1, y1), TwoDimensionalVector(x2, y2)));
     }
 
     void buildCompoundBegin()
@@ -49,32 +62,29 @@ class ShapeBuilder
 
     void buildCompoundEnd()
     {
-        std::list<Shape*> components;
-        while(typeid(*_shapes.back()) != typeid(CompoundShape) || !_shapes.back()->createIterator()->isDone())
+        std::list<Shape *> components;
+        while (typeid(*_shapes.back()) != typeid(CompoundShape) || !isThisCompoundShapeEmpty(_shapes.back()))
         {
             components.push_front(_shapes.back());
             _shapes.pop_back();
         }
-        Shape* compound = _shapes.back();
-        for(auto it = components.begin() ; it != components.end() ; it++)
+        Shape *compound = _shapes.back();
+        for (auto it = components.begin(); it != components.end(); it++)
         {
             compound->addShape(*it);
         }
     }
 
-    Shape* getShape() 
+    Shape *getShape()
     {
-        Shape* lastShape = _shapes.back();
+        Shape *lastShape = _shapes.back();
         // _shapes.pop_back();
         return lastShape;
     }
 
-    void reset() 
+    void reset()
     {
+        while(!_shapes.empty()) delete _shapes.front(), _shapes.pop_front();
         _shapes.clear();
-        // ShapeBuilder::_instance = ShapeBuilder();
     }
-
 };
-
-

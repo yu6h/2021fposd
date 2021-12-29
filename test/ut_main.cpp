@@ -1,15 +1,15 @@
 #include <gtest/gtest.h>
 
-// Composite pattern
+// Composite pattern1
 #include "./ut_compound_shape.h"
 #include "./ut_circle.h"
 #include "./ut_rectangle.h"
 #include "./ut_triangle.h"
 #include "./ut_two_dimensional_vector.h"
-// Iterator pattern
+// // // Iterator pattern
 #include "./iterator/ut_null_iterator.h"
 #include "./iterator/ut_compound_iterator.h"
-// Visitor pattern
+// // // Visitor pattern
 #include "./visitor/ut_shape_info_visitor.h"
 // Builder pattern
 #include "./builder/ut_shape_builder.h"

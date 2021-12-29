@@ -70,9 +70,10 @@ void InputHandler::save()
     std::getline(std::cin, filename);
     outputFile.open(filename.append(".txt"), std::ios::out);
 
-    Shape *shape = builder->getShape();
+    // Shape *shape = builder->getShape();
     ShapeInfoVisitor visitor;
-    shape->accept(&visitor);
+    builder->getShape()->accept(&visitor);
+    // shape->accept(&visitor);
 
     if (outputFile.is_open())
     {

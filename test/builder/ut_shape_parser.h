@@ -15,6 +15,7 @@ TEST(CaseParser, ParseCompound){
                 "  Rectangle (3.14 4.00)\n"
                 "  Triangle ([3.00,0.00] [0.00,4.00])\n"
                 "}\n",visitor.getResult());
+    delete parser;
     ShapeParser* parser2 = new ShapeParser(".//test//data//complex_compound.txt");
     parser2->parse();
     Shape* aa = parser2->getShape();
@@ -29,5 +30,5 @@ TEST(CaseParser, ParseCompound){
             "  }\n"
             "  Rectangle (3.14 4.00)\n"
             "}\n",visitor.getResult());
-
+    delete parser2;
 }

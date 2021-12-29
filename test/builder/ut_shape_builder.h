@@ -14,9 +14,9 @@ TEST(CaseShapeBuilder, buildCompound)
     builder->buildCompoundEnd();
 
     Shape* shape = builder->getShape();
-    builder->reset();
-    ShapeInfoVisitor visitor;
-    shape->accept(&visitor);
+
+    ShapeInfoVisitor* visitor = new ShapeInfoVisitor();
+    shape->accept(visitor);
     EXPECT_EQ(
         "CompoundShape {\n"
         "  Circle (3.00)\n"
@@ -26,8 +26,11 @@ TEST(CaseShapeBuilder, buildCompound)
         "    Triangle ([3.00,0.00] [0.00,4.00])\n"
         "  }\n"
         "}\n",
-        visitor.getResult());
-    delete shape;
+        visitor->getResult());
+    builder->reset();
+    delete visitor;
+    // delete shape;
+    // delete builder;
 
 }
 TEST(CaseShapeBuilder, singleton)
@@ -38,21 +41,23 @@ TEST(CaseShapeBuilder, singleton)
 TEST(CaseShapeBuilder, buildCircle)
 {
     ShapeBuilder* builder = ShapeBuilder::getInstance();
-    builder->reset();
+
     builder->buildCircle(10.0);
     Shape *s = builder->getShape();
-    builder->reset();
     EXPECT_EQ("Circle (10.00)",s->info());
-    delete s;
+    builder->reset();
+    // delete s;
+    // delete builder;
 }
 TEST(CaseShapeBuilder, buildRectangle)
 {
     ShapeBuilder* builder = ShapeBuilder::getInstance();
     builder->buildRectangle(10.0,12.0);
     Shape *s = builder->getShape();
-    builder->reset();
     EXPECT_EQ("Rectangle (10.00 12.00)",s->info());
-    delete s;
+    builder->reset();
+    // delete s;
+    // delete builder;
 }
 TEST(CaseShapeBuilder, buildTriangle)
 {
@@ -61,5 +66,7 @@ TEST(CaseShapeBuilder, buildTriangle)
     builder->buildTriangle(10.0,12.0,9.0,8.7);
     Shape *s = builder->getShape();
     EXPECT_EQ("Triangle ([10.00,12.00] [9.00,8.70])",s->info());
-    delete s;
+    builder->reset();
+    // delete s;
+    // delete builder;
 }

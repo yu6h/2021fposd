@@ -3,10 +3,13 @@
 #include <list>
 #include "./iterator/compound_iterator.h"
 #include "./shape.h"
+#include<set>
 class CompoundShape : public Shape
 {
 public:
+
     ~CompoundShape() {
+        while(!_shapes.empty()) delete _shapes.front(), _shapes.pop_front();
     }
 
     double area() const override
@@ -64,6 +67,7 @@ public:
 
         for(auto it = _shapes.begin();it!=_shapes.end();it++){
             if(*it == shape){
+                delete shape;
                 it = _shapes.erase(it);
                 return true;
             }else if(typeid(**it)==typeid(CompoundShape)){
