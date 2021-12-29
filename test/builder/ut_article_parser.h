@@ -2,7 +2,7 @@
 #include"../../src/visitor/html_visitor.h"
 
 TEST(CaseParser, ParseArticle){
-    ShapeParser* parser = new ShapeParser(".//test//data//simple_paragraph.txt");
+    ArticleParser* parser = new ArticleParser(".//test//data//simple_paragraph.txt");
     parser->parse();
     Article* article = parser->getArticle();
     // std::cout<<hh->area()<<std::endl;
@@ -16,7 +16,7 @@ TEST(CaseParser, ParseArticle){
         "<span>This is a text</span>"
         "</div>"
         ,visitor.getResult());
-    delete parser;
+    // delete parser;
     // ShapeParser* parser2 = new ShapeParser(".//test//data//complex_compound.txt");
     // parser2->parse();
     // Shape* aa = parser2->getShape();

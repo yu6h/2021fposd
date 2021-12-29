@@ -5,7 +5,7 @@
 #include "./article_builder.h"
 #include "./article_scanner.h"
 #include "../article.h"
-class ShapeParser{
+class ArticleParser{
     private:
     std::fstream myFile;
     std::string text;
@@ -14,7 +14,7 @@ class ShapeParser{
     ArticleBuilder* _builder;
 public:
     // `filePath` is a relative path of makefile
-    ShapeParser(std::string filePath):_article(nullptr),text("")
+    ArticleParser(std::string filePath):_article(nullptr),text("")
     {
         std::string line;
         myFile.open(filePath,std::ios::in);
@@ -35,7 +35,7 @@ public:
         return text;
     }
 
-    ~ShapeParser() 
+    ~ArticleParser() 
     {
         delete _scanner;
         // delete _builder;
