@@ -3,11 +3,15 @@
 
 class MarkdownVisitor : public ArticleVisitor {
    public:
-    void visitListItem(ListItem* li)override;
+    void visitListItem(ListItem* li)override {
+    _text.append(li->getText());
+    }
+    void visitText(Text* t) override{
+    _text.append(t->getText());
+    }
 
-    void visitText(Text* t) override;
-
-    void visitParagraph(Paragraph* p) override;
-
-
+    void visitParagraph(Paragraph* p) override{
+    _text.append(p->getText()).append("\n");
+    }
+    // std::string getResult() const override { }
 };

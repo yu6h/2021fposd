@@ -1,11 +1,10 @@
 #pragma once
-#pragma once
 #include"null_iterator.h"
 #include<list>
 #include<vector>
 #include <typeinfo>
-class Article;
-class CompoundShape;
+
+
 
 template<class ForwardIterator>
 class CompoundIterator : public Iterator {

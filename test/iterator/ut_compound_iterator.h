@@ -4,6 +4,7 @@
 #include"../../src/text.h"
 #include"../../src/list_item.h"
 #include"../../src/paragraph.h"
+#include"../../src/iterator/null_iterator.h"
 TEST(CaseCompoundIterator, Iterator) {
     Paragraph p(1, "title");
     ListItem* l1 = new ListItem("list1");

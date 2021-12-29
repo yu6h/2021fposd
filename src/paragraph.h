@@ -4,7 +4,7 @@
 #include<typeinfo>
 #include<vector>
 #include"iterator/compound_iterator.h"
-#include"visitor/article_visitor.h"
+// #include"visitor/article_visitor.h"
 #include <iostream>   // std::cout
 
 class Paragraph : public Article {

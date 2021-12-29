@@ -1,6 +1,6 @@
 #include"../../src/builder/article_builder.h"
 #include"../../src/visitor/markdown_visitor.h"
-#include"../../src/visitor/html_visitor.h"
+// #include"../../src/visitor/html_visitor.h"
 #include <gtest/gtest.h>
 TEST(CaseArticleBuilder, buildArticle)
 {
@@ -18,7 +18,7 @@ TEST(CaseArticleBuilder, buildArticle)
 
     Article* article = builder->getArticle();
 
-    ArticleVisitor* visitor = new HtmlVisitor();
+    HtmlVisitor* visitor = new HtmlVisitor();
     article->accept(visitor);
     EXPECT_EQ(
         "<div>"
@@ -47,35 +47,3 @@ TEST(CaseArticleBuilder, singleton)
     EXPECT_EQ(ArticleBuilder::getInstance(),ArticleBuilder::getInstance());
 }
 
-// TEST(CaseShapeBuilder, buildCircle)
-// {
-//     ShapeBuilder* builder = ShapeBuilder::getInstance();
-
-//     builder->buildCircle(10.0);
-//     Shape *s = builder->getShape();
-//     EXPECT_EQ("Circle (10.00)",s->info());
-//     builder->reset();
-//     // delete s;
-//     // delete builder;
-// }
-// TEST(CaseShapeBuilder, buildRectangle)
-// {
-//     ShapeBuilder* builder = ShapeBuilder::getInstance();
-//     builder->buildRectangle(10.0,12.0);
-//     Shape *s = builder->getShape();
-//     EXPECT_EQ("Rectangle (10.00 12.00)",s->info());
-//     builder->reset();
-//     // delete s;
-//     // delete builder;
-// }
-// TEST(CaseShapeBuilder, buildTriangle)
-// {
-//     ShapeBuilder* builder = ShapeBuilder::getInstance();
-
-//     builder->buildTriangle(10.0,12.0,9.0,8.7);
-//     Shape *s = builder->getShape();
-//     EXPECT_EQ("Triangle ([10.00,12.00] [9.00,8.70])",s->info());
-//     builder->reset();
-//     // delete s;
-//     // delete builder;
-// }

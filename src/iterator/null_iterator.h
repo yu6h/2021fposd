@@ -1,9 +1,9 @@
 #pragma once
-#include"iterator.h"
-#include<string>
+#include "iterator.h"
 
 class NullIterator : public Iterator {
 public:
+    
     void first() override { throw std::string("This method is not allowed! Because NullIterator doesn't point to any address.");}
 
     Article* currentItem() const override { throw std::string("This method is not allowed! Because NullIterator doesn't point to any address.");}
