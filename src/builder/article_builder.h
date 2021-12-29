@@ -67,7 +67,6 @@ public:
     Article *getArticle()
     {
         Article *lastArticle = _articles.back();
-        // _shapes.pop_back();
         return lastArticle;
     }
 
