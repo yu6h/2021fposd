@@ -1,4 +1,8 @@
 #pragma once
+#include"../../src/iterator/null_iterator.h"
+#include<gtest/gtest.h>
+
+
 TEST(CaseNullIterator, NullIterator){
     Iterator* it = new NullIterator();
     ASSERT_TRUE(it->isDone());
@@ -27,18 +31,13 @@ TEST(CaseNullIterator, NullIterator){
     delete it;
 
 
-    Circle c(10.0);
-    Iterator* cc = c.createIterator();
-    ASSERT_TRUE(typeid(*cc)==typeid(NullIterator));
+    Text text("ddfasdfsdf");
+    Iterator* cc = text.createIterator();
+    ASSERT_TRUE(cc->isDone());
     delete cc;
 
-    Rectangle r(10.0,80.0);
-    Iterator* rr = r.createIterator();
-    ASSERT_TRUE(typeid(*rr)==typeid(NullIterator));
+    ListItem listItem("i am listitem");
+    Iterator* rr = listItem.createIterator();
+    ASSERT_TRUE(rr->isDone());
     delete rr;
-
-    Triangle t(TwoDimensionalVector(3,0),TwoDimensionalVector(0,4));
-    Iterator* tt = t.createIterator();
-    ASSERT_TRUE(typeid(*tt)==typeid(NullIterator));
-    delete tt;
 }
