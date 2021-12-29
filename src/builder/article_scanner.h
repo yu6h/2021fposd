@@ -41,6 +41,7 @@ public:
             len++;
             if(pos == _input.length())throw std::invalid_argument("It is already in the end.");
         }
+        pos++;
         return std::string(_input,start,len);
     }
     void skipWhiteSpace()
